@@ -3,3 +3,4 @@
 /data
 **/*.RData
 **/*.RDS
+R/check_odds.R

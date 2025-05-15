@@ -6,7 +6,7 @@
  * - Separate offensive and defensive capabilities for each team
  * - Time-varying team strengths using random walks
  * - Hierarchical structure for team parameters
- * - Bivariate Poisson distribution for correlated goal scoring
+ * - Diagonal-inflated bivariate Poisson distribution for modeling score outcomes
  * - Accounts for varying time intervals between matches
  * - Home/away advantage effects
  * 
@@ -22,17 +22,25 @@
  *    where Δt is the time between matches
  * 
  * 3. Scoring Model:
- *    Goals follow a bivariate Poisson distribution with correlation
- *    Parameters depend on:
- *    - Team offensive and defensive strengths
- *    - Home advantage
- *    - Team-specific correlation effects
+ *    Goals follow a diagonal-inflated bivariate Poisson distribution:
+ *    - Core structure uses bivariate Poisson for modeling correlated goal counts
+ *    - Diagonal inflation specifically models draws (equal scores) using a categorical distribution
+ *    - Categorical prior parameters (alpha_prior) are calculated from historical data
+ *    - Parameters depend on team offensive/defensive strengths and home advantage
  * 
- * 4. Correlation Structure:
- *    Uses trivariate reduction method: Y₁ = X₁ + X₃, Y₂ = X₂ + X₃
- *    where X₁, X₂, X₃ are independent Poisson variables
- *    The shared component λ₃ is parameterized to ensure correlation
- *    is independent of scoring rates
+ * 4. Diagonal Inflation Structure:
+ *    The distribution is a mixture model with weight parameter p:
+ *    - With probability p: Scores follow a categorical distribution over diagonal values (0-0, 1-1, 2-2, etc.)
+ *    - With probability (1-p): Scores follow standard bivariate Poisson
+ *    - This accounts for the over-representation of draws in football compared to regular bivariate Poisson
+ *    - The categorical distribution's simplex (pi_diag) has a Dirichlet prior with parameters
+ *      derived from historical data patterns
+ * 
+ * 5. Correlation Structure:
+ *    For the bivariate Poisson component:
+ *    - Uses trivariate reduction method: Y₁ = X₁ + X₃, Y₂ = X₂ + X₃
+ *    - X₁, X₂, X₃ are independent Poisson variables
+ *    - The shared component λ₃ is parameterized to ensure correlation is independent of scoring rates
  */
 
 functions {
@@ -107,6 +115,55 @@ functions {
     out[2] = y2 + y3;
     return out;
   }
+
+  /**
+   * Log probability mass function for diagonal-inflated bivariate Poisson distribution
+   * 
+   * Computes the log probability mass for a diagonal-inflated bivariate Poisson distribution.
+   * The distribution is a mixture between a regular bivariate Poisson and a categorical distribution
+   * for diagonal outcomes (draws).
+   * 
+   * @param x Array of length 2 containing the observed counts [y1, y2]
+   * @param lambda1 Rate parameter for first margin
+   * @param lambda2 Rate parameter for second margin  
+   * @param lambda3 Rate parameter for shared component (controls correlation)
+   * @param p Mixture weight for diagonal inflation (between 0 and 1)
+   * @param pi_diag Simplex vector for categorical distribution of diagonal values (draws)
+   *               with priors derived from historical data
+   * @return Log probability mass
+   */
+  real poisson_2d_log_inflated_lpmf(array[] int x,
+                real lambda1, real lambda2, real lambda3,
+                real p,
+                vector pi_diag) {
+
+
+    real lp_bp = poisson_2d_log_lpmf(x | lambda1, lambda2, lambda3);
+
+    if (x[1] == x[2]) {
+      real lp_diag = log(pi_diag[x[1] + 1]);
+
+      return log_mix(p, lp_diag, lp_bp); 
+    }
+    return log1m(p) + lp_bp;
+  }
+
+  array[] int poisson_2d_log_inflated_rng(
+    real lambda1, real lambda2, real lambda3,
+    real p,
+    vector pi_diag
+  ) {
+    array[2] int out;
+    if (bernoulli_rng(p) == 1) {
+      int d = categorical_rng(pi_diag);
+      out[1] = d;
+      out[2] = d;
+    } else {
+      out = poisson_2d_log_rng(lambda1, lambda2, lambda3);
+    }
+    return out;
+  }
+
 }
 
 /**
@@ -141,6 +198,10 @@ data {
   array[N_pred] int<lower=1, upper=K> team2_pred;  // Team 2 ID for each prediction game
   vector[N_pred] pred_timediff1;
   vector[N_pred] pred_timediff2;
+
+  // Priors for the simplex of the categorical distribution
+  int max_draw_scores;
+  vector[max_draw_scores + 1] alpha_prior;
 }
 
 transformed data {
@@ -159,6 +220,24 @@ transformed data {
   vector[N_top_teams] delta_t_top = sqrt(time_to_next_games);
   vector[N_pred] pred_delta_t1 = sqrt(pred_timediff1);
   vector[N_pred] pred_delta_t2 = sqrt(pred_timediff2);
+
+  matrix[K, N_rounds] rest_days;
+  for (k in 1:K) {
+    for (n in 1:N_rounds) {
+      rest_days[k, n] = time_between_matches[k, n] <= 7 ? time_between_matches[k, n] : 7;
+    }
+  }
+
+  vector[N_top_teams] rest_days_top;
+  for (n in 1:N_top_teams) {
+    rest_days_top[n] = time_to_next_games[n] <= 7 ? time_to_next_games[n] : 7;
+  }
+  vector[N_pred] pred_rest_days1;
+  vector[N_pred] pred_rest_days2;
+  for (n in 1:N_pred) {
+    pred_rest_days1[n] = pred_timediff1[n] <= 7 ? pred_timediff1[n] : 7;
+    pred_rest_days2[n] = pred_timediff2[n] <= 7 ? pred_timediff2[n] : 7;
+  }
 }
 
 /**
@@ -186,17 +265,30 @@ parameters {
   real<lower = 0> scale_sigma_def;
   real mean_sigma_def;
 
+  // Mean of log goals
+  real mean_log_goals;
+
+
   // Home advantage parameters - non-centered parameterization
   vector<lower = 0>[K] home_advantage_off;
   vector<lower = 0>[K] home_advantage_def;
+  
   // Correlation parameter
   real alpha_mu3;
 
+  
+
+  // Prediction parameters
   vector[N_pred] z_off_pred;
   vector[N_pred] z_def_pred;
 
+  // Top team strength parameters
   vector[N_top_teams] z_off_top;
   vector[N_top_teams] z_def_top;
+
+  // Diagonal inflation parameters
+  simplex[max_draw_scores + 1] pi_diag;
+  real<lower = 0, upper = 1> p;
 }
 
 /**
@@ -213,7 +305,7 @@ transformed parameters {
 
   // Defensive parameters over time
   array[N_rounds] vector[K] defense;        // Defensive strengths for each round
-  vector<lower = 0>[K] sigma_def = exp(z_sigma_def);
+  vector<lower = 0>[K] sigma_def = exp(mean_sigma_def + z_sigma_def * scale_sigma_def);
 
   // Initialize first round
   offense[1, ] = off0;
@@ -224,6 +316,7 @@ transformed parameters {
     offense[i, ] = offense[i - 1, ] + delta_t[ , i] .* sigma_off .* z_off[i, ];
     defense[i, ] = defense[i - 1, ] + delta_t[ , i] .* sigma_def .* z_def[i, ];
   }
+
 }
 
 /**
@@ -255,19 +348,24 @@ model {
   
   // Priors for volatility parameters
   z_sigma_off ~ std_normal();
-  scale_sigma_off ~ exponential(1);
-  mean_sigma_off ~ normal(log(0.02), 2);
+  scale_sigma_off ~ exponential(2);
+  mean_sigma_off ~ normal(-4, 2);
 
   z_sigma_def ~ std_normal();
-  scale_sigma_def ~ exponential(1);
-  mean_sigma_def ~ normal(log(0.02), 2);
+  scale_sigma_def ~ exponential(2);
+  mean_sigma_def ~ normal(-5, 2);
   
   // Priors for home advantage
   home_advantage_off ~ std_normal();
   home_advantage_def ~ std_normal();
 
+
   // Priors for effect of goals scored and conceded in the league
   alpha_mu3 ~ std_normal();
+
+  pi_diag ~ dirichlet(alpha_prior);
+  p ~ beta(2, 18);
+  mean_log_goals ~ normal(log(1.5), 1);
 
   // Likelihood with correlation structure
   /**
@@ -285,21 +383,23 @@ model {
     vector[2] def;
     vector[2] mu;
     // Home team
-    off[1] = offense[round1[n], team1[n]] + home_advantage_off[team1[n]];
-    def[1] = defense[round1[n], team1[n]] + home_advantage_def[team1[n]];
+    off[1] = offense[round1[n], team1[n]] + 
+      home_advantage_off[team1[n]];
+    def[1] = defense[round1[n], team1[n]] + 
+      home_advantage_def[team1[n]];
 
     // Away team
     off[2] = offense[round2[n], team2[n]];
     def[2] = defense[round2[n], team2[n]];
 
-    mu[1] = off[1] - def[2];
-    mu[2] = off[2] - def[1];
+    mu[1] = mean_log_goals + off[1] - def[2];
+    mu[2] = mean_log_goals + off[2] - def[1];
     
     vector[2] lambda = exp(mu);
 
     real logit_rho = alpha_mu3;
     real mu3 = log_inv_logit(logit_rho) + 0.5 * (mu[1] + mu[2]);
-    goals1_2[ , n] ~ poisson_2d_log(mu[1], mu[2], mu3);
+    goals1_2[ , n] ~ poisson_2d_log_inflated(mu[1], mu[2], mu3, p, pi_diag);
     
   }
 }
@@ -362,16 +462,16 @@ generated quantities {
 
     def[2] = defense[N_rounds, team2_pred[n]] + 
       pred_delta_t2[n] .* sigma_def[team2_pred[n]] .* z_def_pred[n];
-      
-    mu[1] = off[1] - def[2];
-    mu[2] = off[2] - def[1];
+
+    mu[1] = mean_log_goals + off[1] - def[2];
+    mu[2] = mean_log_goals + off[2] - def[1];
     
     vector[2] lambda = exp(mu);
 
     real logit_rho = alpha_mu3;
     real mu3 = log_inv_logit(logit_rho) + 0.5 * (mu[1] + mu[2]);
     
-    goals_pred[n] = poisson_2d_log_rng(mu[1], mu[2], mu3);
+    goals_pred[n] = poisson_2d_log_inflated_rng(mu[1], mu[2], mu3, p, pi_diag);
     goals1_pred[n] = goals_pred[n, 1];
     goals2_pred[n] = goals_pred[n, 2];
     goal_diff_pred[n] = goals1_pred[n] - goals2_pred[n];

@@ -9,12 +9,13 @@ source(here("R", "historical_evaluation.R"))
 
 run_historical_evaluation <- function(sex = "male", window_years = 3) {
   # Read data
-  d <- read_csv(here("results", sex, "d.csv"))
+  d <- read_csv(here("data", sex, "data.csv"))
 
   # Get all unique game dates
   game_dates <- d |>
-    arrange(date) |>
-    pull(date) |>
+    filter(dags < max(dags)) |>
+    arrange(dags) |>
+    pull(dags) |>
     unique() |>
     rev()
 
@@ -28,7 +29,7 @@ run_historical_evaluation <- function(sex = "male", window_years = 3) {
   }
 
   # Loop over dates in reverse
-  for (i in length(game_dates):1) {
+  for (i in seq_along(game_dates)) {
     end_date <- game_dates[i]
     start_date <- end_date - years(window_years)
 
@@ -71,4 +72,4 @@ run_historical_evaluation <- function(sex = "male", window_years = 3) {
 }
 
 # Example usage:
-# run_historical_evaluation(sex = "male", window_years = 3)
+run_historical_evaluation(sex = "male", window_years = 3)

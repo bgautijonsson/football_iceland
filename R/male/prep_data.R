@@ -306,6 +306,27 @@ write_csv(
   here("results", "male", "pred_d.csv")
 )
 
+alpha_prior <- read_csv(
+  here("data", "male", "data.csv")
+) |>
+  select(
+    season = timabil,
+    division,
+    date = dags,
+    home = heima,
+    away = gestir,
+    home_goals = stig_heima,
+    away_goals = stig_gestir
+  ) |>
+  filter(home_goals == away_goals) |>
+  count(home_goals) |>
+  mutate(
+    n = (n + 0.5),
+    n = n / sum(n),
+    n = n * 50
+  ) |>
+  pull(n)
+
 # Prepare Stan data
 stan_data <- list(
   K = nrow(teams),
@@ -326,5 +347,7 @@ stan_data <- list(
   pred_timediff2 = pred_d$away_timediff,
   time_to_next_games = time_to_next_games,
   top_teams = top_teams$team_nr,
-  N_top_teams = 12
+  N_top_teams = 12,
+  max_draw_scores = length(alpha_prior) - 1,
+  alpha_prior = alpha_prior
 )

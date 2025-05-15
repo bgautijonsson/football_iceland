@@ -20,7 +20,7 @@ source(
 model <- cmdstan_model(
   here(
     "Stan",
-    "model_poisson_attack_defense_correlation_rwmatches.stan"
+    "bivariate_poisson_inflated_diagonal.stan"
   )
 )
 

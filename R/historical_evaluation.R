@@ -14,25 +14,56 @@ Sys.setlocale("LC_ALL", "is_IS.UTF-8")
 
 fit_historical_model <- function(start_date, end_date, sex = "male") {
   # Read data
-  d <- read_csv(here("results", sex, "d.csv"))
-  teams <- read_csv(here("results", sex, "teams.csv"))
-
-  # Filter data for training period
-  d_train <- d |>
+  d <- read_csv(here("data", sex, "data.csv")) |>
+    select(
+      season = timabil,
+      division,
+      date = dags,
+      home = heima,
+      away = gestir,
+      home_goals = stig_heima,
+      away_goals = stig_gestir
+    ) |>
     filter(
-      date >= start_date,
-      date <= end_date
+      date >= start_date
+    ) |>
+    arrange(date) |>
+    mutate(
+      game_nr = row_number()
     )
+
+  # Create team mapping
+  teams <- tibble(
+    team = unique(c(d$home, d$away))
+  ) |>
+    arrange(team) |>
+    mutate(team_nr = row_number())
 
   # Get games to predict (up to one month after end_date)
   next_games <- d |>
     filter(
       date > end_date,
       date <= end_date + 30
+    ) |>
+    select(
+      division,
+      date,
+      home,
+      away
+    ) |>
+    mutate(
+      game_nr = row_number()
+    )
+
+  # Filter data for training period
+  d <- d |>
+    filter(
+      date >= start_date,
+      date <= end_date
     )
 
   # Calculate time differences between matches
-  timediffs <- d_train |>
+  timediffs <- d |>
     pivot_longer(c(home, away)) |>
     select(
       game_nr,
@@ -57,7 +88,7 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
     )
 
   # Calculate round numbers for each team
-  rounds <- d_train |>
+  rounds <- d |>
     pivot_longer(c(home, away)) |>
     select(
       game_nr,
@@ -78,7 +109,7 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
     )
 
   # Calculate round numbers for each team and season
-  season_rounds <- d_train |>
+  season_rounds <- d |>
     pivot_longer(c(home, away)) |>
     select(
       game_nr,
@@ -100,7 +131,7 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
     select(-away)
 
   # Prepare model data
-  model_d <- d_train |>
+  model_d <- d |>
     inner_join(timediffs) |>
     inner_join(rounds) |>
     inner_join(season_rounds) |>
@@ -169,6 +200,33 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
     distinct(value) |>
     rename(team = value) |>
     inner_join(teams)
+
+  next_games <- next_games |>
+    inner_join(
+      next_games |>
+        pivot_longer(c(home, away), values_to = "team") |>
+        inner_join(
+          latest_game_dates
+        ) |>
+        mutate(
+          team_game = row_number(),
+          last_date = if_else(team_game == 1, latest_date, lag(date)),
+          .by = team
+        ) |>
+        mutate(
+          timediff = as.numeric(date - last_date)
+        ) |>
+        select(game_nr, name, timediff) |>
+        pivot_wider(values_from = timediff) |>
+        rename(
+          home_timediff = home,
+          away_timediff = away
+        )
+    ) |>
+    mutate_at(
+      vars(home_timediff, away_timediff),
+      \(x) pmin(x, 50)
+    )
 
   # Prepare prediction data
   pred_d <- next_games |>
@@ -251,6 +309,11 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
       away,
       home_goals,
       away_goals
+    ) |>
+    count(date, division, home, away, home_goals, away_goals) |>
+    mutate(
+      p = n / sum(n),
+      .by = c(date, division, home, away)
     )
 
   # Save predictions
@@ -274,12 +337,7 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
     )
 
   # Return results for potential further analysis
-  return(list(
-    results = results,
-    predictions = posterior_goals,
-    training_data = d_train,
-    prediction_data = next_games
-  ))
+  return(NULL)
 }
 
 # Example usage:

@@ -28,88 +28,6 @@
  *    - Home advantage
  *    - Team-specific correlation effects
  * 
- * 4. Correlation Structure:
- *    Uses trivariate reduction method: Y₁ = X₁ + X₃, Y₂ = X₂ + X₃
- *    where X₁, X₂, X₃ are independent Poisson variables
- *    The shared component λ₃ is parameterized to ensure correlation
- *    is independent of scoring rates
- */
-
-functions {
-
-  /**
-   * Bivariate Poisson log-PMF with log-scale parameters
-   * 
-   * Implements the trivariate reduction method for bivariate Poisson:
-   * Y1 = X1 + X3, Y2 = X2 + X3
-   * where X1, X2, X3 are independent Poisson variables
-   * 
-   * @param x Array of length 2 containing the observed counts [y1, y2]
-   * @param log_lambda1 Log of the rate parameter for the first margin
-   * @param log_lambda2 Log of the rate parameter for the second margin
-   * @param log_lambda3 Log of the rate parameter for the shared component
-   * @return The log probability mass function evaluated at x
-   */
-  real poisson_2d_log_lpmf(
-    array[] int x,
-    real log_lambda1,
-    real log_lambda2,
-    real log_lambda3
-  ) {
-    int x1 = x[1];
-    int x2 = x[2];
-
-    // If either count is negative, this probability is 0 
-    if (x1 < 0 || x2 < 0)
-      return negative_infinity();
-
-    real lambda1 = exp(log_lambda1);
-    real lambda2 = exp(log_lambda2);
-    real lambda3 = exp(log_lambda3);
-
-    // Summation index upper bound
-    int K = min(x1, x2);
-
-    vector[K + 1] log_terms;
-
-    for (k in 0:K) {
-      log_terms[k + 1] =
-        k * log_lambda3
-        + (x1 - k) * log_lambda1
-        + (x2 - k) * log_lambda2
-        - ( lgamma(k + 1)
-          + lgamma(x1 - k + 1)
-          + lgamma(x2 - k + 1) );
-    }
-
-    return
-    - (lambda1 + lambda2 + lambda3)
-    + log_sum_exp(log_terms);
-  }
-
-  /**
-   * Random number generator for bivariate Poisson distribution
-   * 
-   * Generates correlated count data using the trivariate reduction method
-   * 
-   * @param lambda1 Rate parameter for first margin
-   * @param lambda2 Rate parameter for second margin
-   * @param lambda3 Rate parameter for shared component (controls correlation)
-   * @return Array of length 2 containing the generated counts
-   */
-  array[] int poisson_2d_log_rng(real lambda1, real lambda2, real lambda3) {
-    int y1 = poisson_log_rng(lambda1);
-    int y2 = poisson_log_rng(lambda2);
-    int y3 = poisson_log_rng(lambda3);
-
-    array[2] int out;
-    out[1] = y1 + y3;
-    out[2] = y2 + y3;
-    return out;
-  }
-}
-
-/**
  * Input Data
  * 
  * The model requires match results and timing information:
@@ -189,8 +107,7 @@ parameters {
   // Home advantage parameters - non-centered parameterization
   vector<lower = 0>[K] home_advantage_off;
   vector<lower = 0>[K] home_advantage_def;
-  // Correlation parameter
-  real alpha_mu3;
+
 
   vector[N_pred] z_off_pred;
   vector[N_pred] z_def_pred;
@@ -209,7 +126,7 @@ parameters {
 transformed parameters {
   // Offensive parameters over time
   array[N_rounds] vector[K] offense;        // Offensive strengths for each round
-  vector<lower = 0>[K] sigma_off = exp(mean_sigma_off + z_sigma_off * scale_sigma_off);
+  vector<lower = 0>[K] sigma_off = exp(z_sigma_off);
 
   // Defensive parameters over time
   array[N_rounds] vector[K] defense;        // Defensive strengths for each round
@@ -266,9 +183,6 @@ model {
   home_advantage_off ~ std_normal();
   home_advantage_def ~ std_normal();
 
-  // Priors for effect of goals scored and conceded in the league
-  alpha_mu3 ~ std_normal();
-
   // Likelihood with correlation structure
   /**
    * The correlation between goals is modeled through the shared component λ₃
@@ -294,13 +208,9 @@ model {
 
     mu[1] = off[1] - def[2];
     mu[2] = off[2] - def[1];
-    
-    vector[2] lambda = exp(mu);
 
-    real logit_rho = alpha_mu3;
-    real mu3 = log_inv_logit(logit_rho) + 0.5 * (mu[1] + mu[2]);
-    goals1_2[ , n] ~ poisson_2d_log(mu[1], mu[2], mu3);
-    
+    goals1[n] ~ poisson_log(mu[1]);
+    goals2[n] ~ poisson_log(mu[2]);    
   }
 }
 
@@ -336,7 +246,6 @@ generated quantities {
   vector[N_top_teams] cur_defense = (cur_defense_away + cur_defense_home) / 2;
   vector[N_top_teams] cur_strength = cur_offense + cur_defense;
 
-  array[N_pred, 2] int<lower=0> goals_pred;          // Predicted goals for team 1
   array[N_pred] int<lower = 0> goals1_pred;
   array[N_pred] int<lower = 0> goals2_pred;
   array[N_pred] int goal_diff_pred;       // Predicted goal difference
@@ -367,13 +276,9 @@ generated quantities {
     mu[2] = off[2] - def[1];
     
     vector[2] lambda = exp(mu);
-
-    real logit_rho = alpha_mu3;
-    real mu3 = log_inv_logit(logit_rho) + 0.5 * (mu[1] + mu[2]);
     
-    goals_pred[n] = poisson_2d_log_rng(mu[1], mu[2], mu3);
-    goals1_pred[n] = goals_pred[n, 1];
-    goals2_pred[n] = goals_pred[n, 2];
+    goals1_pred[n] = poisson_rng(lambda[1]);
+    goals2_pred[n] = poisson_rng(lambda[2]);
     goal_diff_pred[n] = goals1_pred[n] - goals2_pred[n];
     total_goals_pred[n] = goals1_pred[n] + goals2_pred[n];
   }
