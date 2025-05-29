@@ -58,7 +58,7 @@ d <- read_csv(
 
 write_csv(
   d,
-  here("results", "female", "data.csv")
+  here("results", "female", "d.csv")
 )
 
 # Create team mapping

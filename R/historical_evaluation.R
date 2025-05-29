@@ -39,17 +39,19 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
     arrange(team) |>
     mutate(team_nr = row_number())
 
-  # Get games to predict (up to one month after end_date)
-  next_games <- d |>
+  # Read and prepare next games for prediction
+  next_games <- read_csv(
+    here("data", sex, "schedule.csv")
+  ) |>
     filter(
-      date > end_date,
-      date <= end_date + 30
+      dags >= end_date,
+      (dags <= end_date + 14) | (division == 1)
     ) |>
-    select(
-      division,
-      date,
-      home,
-      away
+    arrange(dags) |>
+    rename(
+      date = dags,
+      home = heima,
+      away = gestir
     ) |>
     mutate(
       game_nr = row_number()
@@ -266,7 +268,7 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
   model <- cmdstan_model(
     here(
       "Stan",
-      "model_poisson_attack_defense_correlation_rwmatches.stan"
+      "bivariate_poisson_inflated_diagonal_corrmodel.stan"
     )
   )
 
@@ -318,7 +320,7 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
 
   # Save predictions
   dir.create(
-    here("results", sex, "historical"),
+    here("results", sex, "historical", end_date),
     showWarnings = FALSE,
     recursive = TRUE
   )
@@ -329,10 +331,331 @@ fit_historical_model <- function(start_date, end_date, sex = "male") {
         "results",
         sex,
         "historical",
-        paste0(
-          format(end_date, "%Y-%m-%d"),
-          ".csv"
+        end_date,
+        "posterior_goals.csv"
+      )
+    )
+
+  posterior_goals <- results$draws(c("goals1_pred", "goals2_pred")) |>
+    as_draws_df() |>
+    as_tibble() |>
+    pivot_longer(
+      -c(.draw, .chain, .iteration),
+      names_to = "parameter",
+      values_to = "value"
+    ) |>
+    mutate(
+      type = if_else(
+        str_detect(parameter, "goals1"),
+        "home_goals",
+        "away_goals"
+      ),
+      game_nr = str_match(parameter, "d\\[(.*)\\]$")[, 2] |> as.numeric()
+    ) |>
+    select(.draw, type, game_nr, value) |>
+    pivot_wider(names_from = type, values_from = value) |>
+    inner_join(next_games, by = "game_nr") |>
+    filter(
+      division == 1
+    ) |>
+    select(
+      iteration = .draw,
+      game_nr,
+      division,
+      date,
+      home,
+      away,
+      home_goals,
+      away_goals
+    )
+
+  base_points <- d |>
+    filter(season == 2025, division == 1) |>
+    mutate(
+      result = case_when(
+        home_goals > away_goals ~ "home",
+        home_goals < away_goals ~ "away",
+        TRUE ~ "tie"
+      )
+    ) |>
+    pivot_longer(c(home, away), values_to = "team") |>
+    mutate(
+      points = case_when(
+        result == "tie" ~ 1,
+        result == name ~ 3,
+        TRUE ~ 0
+      )
+    ) |>
+    summarise(
+      base_points = sum(points),
+      .by = c(team)
+    ) |>
+    arrange(desc(base_points))
+
+  p_top <- posterior_goals |>
+    mutate(
+      result = case_when(
+        home_goals > away_goals ~ "home",
+        home_goals < away_goals ~ "away",
+        TRUE ~ "tie"
+      )
+    ) |>
+    pivot_longer(c(home, away), values_to = "team") |>
+    mutate(
+      points = case_when(
+        result == "tie" ~ 1,
+        result == name ~ 3,
+        TRUE ~ 0
+      )
+    ) |>
+    summarise(
+      points = sum(points),
+      .by = c(iteration, team)
+    ) |>
+    left_join(
+      base_points
+    ) |>
+    mutate(
+      base_points = coalesce(base_points, 0),
+      points = points + base_points
+    ) |>
+    arrange(desc(points)) |>
+    mutate(
+      position = row_number(),
+      .by = iteration
+    ) |>
+    summarise(
+      p_top = mean(position <= 6),
+      .by = team
+    ) |>
+    arrange(desc(p_top))
+
+  plot_dat <- posterior_goals |>
+    mutate(
+      result = case_when(
+        home_goals > away_goals ~ "home",
+        home_goals < away_goals ~ "away",
+        TRUE ~ "tie"
+      )
+    ) |>
+    pivot_longer(c(home, away), values_to = "team") |>
+    mutate(
+      points = case_when(
+        result == "tie" ~ 1,
+        result == name ~ 3,
+        TRUE ~ 0
+      )
+    ) |>
+    summarise(
+      points = sum(points),
+      .by = c(iteration, team)
+    ) |>
+    left_join(
+      base_points
+    ) |>
+    mutate(
+      base_points = coalesce(base_points, 0),
+      points = points + base_points
+    ) |>
+    count(team, points) |>
+    mutate(
+      p_raw = n / sum(n),
+      p = p_raw / max(p_raw),
+      mean = sum(p_raw * points),
+      .by = team
+    ) |>
+    inner_join(p_top) |>
+    mutate(
+      p_top = scales::percent(p_top, accuracy = 1),
+      team = glue("{team} ({p_top})"),
+      team = fct_reorder(team, mean),
+      team_nr = as.numeric(team)
+    )
+
+  plot_dat |>
+    write_csv(
+      here(
+        "results",
+        sex,
+        "historical",
+        end_date,
+        "league_points.csv"
+      )
+    )
+
+  plot_dat <- posterior_goals |>
+    mutate(
+      result = case_when(
+        home_goals > away_goals ~ "home",
+        home_goals < away_goals ~ "away",
+        TRUE ~ "tie"
+      )
+    ) |>
+    pivot_longer(c(home, away), values_to = "team") |>
+    mutate(
+      points = case_when(
+        result == "tie" ~ 1,
+        result == name ~ 3,
+        TRUE ~ 0
+      )
+    ) |>
+    summarise(
+      points = sum(points),
+      .by = c(iteration, team)
+    ) |>
+    left_join(
+      base_points
+    ) |>
+    mutate(
+      base_points = coalesce(base_points, 0),
+      points = points + base_points
+    ) |>
+    arrange(iteration, desc(points)) |>
+    mutate(
+      placement = row_number(),
+      .by = iteration
+    ) |>
+    count(team, placement) |>
+    mutate(
+      p_raw = n / sum(n),
+      p = p_raw / max(p_raw),
+      mean = sum(p_raw * placement),
+      .by = team
+    ) |>
+    inner_join(p_top) |>
+    mutate(
+      team = fct_reorder(team, mean),
+      team_nr = as.numeric(team)
+    )
+
+  plot_dat |>
+    write_csv(
+      here(
+        "results",
+        sex,
+        "historical",
+        end_date,
+        "placement.csv"
+      )
+    )
+
+  plot_dat_away <- results$draws("cur_strength_away") |>
+    as_draws_df() |>
+    as_tibble() |>
+    pivot_longer(c(-.chain, -.draw, -.iteration)) |>
+    mutate(
+      team = teams$team[parse_number(name)],
+      type = "Samtals"
+    ) |>
+    bind_rows(
+      results$draws("cur_offense_away") |>
+        as_draws_df() |>
+        as_tibble() |>
+        pivot_longer(c(-.chain, -.draw, -.iteration)) |>
+        mutate(
+          team = teams$team[parse_number(name)],
+          type = "Sókn"
         )
+    ) |>
+    bind_rows(
+      results$draws("cur_defense_away") |>
+        as_draws_df() |>
+        as_tibble() |>
+        pivot_longer(c(-.chain, -.draw, -.iteration)) |>
+        mutate(
+          team = teams$team[parse_number(name)],
+          type = "Vörn"
+        )
+    ) |>
+    reframe(
+      median = median(value),
+      coverage = c(0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+      lower = quantile(value, 0.5 - coverage / 2),
+      upper = quantile(value, 0.5 + coverage / 2),
+      .by = c(team, type)
+    ) |>
+    mutate(
+      type = as_factor(type) |>
+        fct_relevel("Sókn", "Vörn", "Samtals"),
+      team = factor(
+        team,
+        levels = unique(team)[order(unique(median[type == "Samtals"]))]
+      )
+    )
+
+  plot_dat_home <- results$draws("cur_strength_home") |>
+    as_draws_df() |>
+    as_tibble() |>
+    pivot_longer(c(-.chain, -.draw, -.iteration)) |>
+    mutate(
+      team = teams$team[parse_number(name)],
+      type = "Samtals"
+    ) |>
+    bind_rows(
+      results$draws("cur_offense_home") |>
+        as_draws_df() |>
+        as_tibble() |>
+        pivot_longer(c(-.chain, -.draw, -.iteration)) |>
+        mutate(
+          team = teams$team[parse_number(name)],
+          type = "Sókn"
+        )
+    ) |>
+    bind_rows(
+      results$draws("cur_defense_home") |>
+        as_draws_df() |>
+        as_tibble() |>
+        pivot_longer(c(-.chain, -.draw, -.iteration)) |>
+        mutate(
+          team = teams$team[parse_number(name)],
+          type = "Vörn"
+        )
+    ) |>
+    reframe(
+      median = median(value),
+      coverage = c(0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+      lower = quantile(value, 0.5 - coverage / 2),
+      upper = quantile(value, 0.5 + coverage / 2),
+      .by = c(team, type)
+    ) |>
+    mutate(
+      type = as_factor(type) |>
+        fct_relevel("Sókn", "Vörn", "Samtals"),
+      team = factor(
+        team,
+        levels = unique(team)[order(unique(median[type == "Samtals"]))]
+      )
+    )
+
+  plot_dat <- plot_dat_away |>
+    mutate(
+      loc = "Gestir"
+    ) |>
+    bind_rows(
+      plot_dat_home |>
+        mutate(
+          loc = "Heima"
+        )
+    ) |>
+    mutate(
+      loc = as_factor(loc) |>
+        fct_relevel("Heima")
+    ) |>
+    semi_join(
+      d |>
+        filter(season == 2025, division == 1) |>
+        pivot_longer(c(home, away), values_to = "team") |>
+        distinct(team)
+    )
+
+  plot_dat |>
+    write_csv(
+      here(
+        "results",
+        sex,
+        "historical",
+        end_date,
+        "current_strength.csv"
       )
     )
 

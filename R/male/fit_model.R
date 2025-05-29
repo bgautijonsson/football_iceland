@@ -20,7 +20,7 @@ source(
 model <- cmdstan_model(
   here(
     "Stan",
-    "bivariate_poisson_inflated_diagonal.stan"
+    "bivariate_poisson_inflated_diagonal_corrmodel.stan"
   )
 )
 

@@ -56,12 +56,46 @@ results <- here(
         division = 3
       )
   ) |>
+  bind_rows(
+    here(
+      "data",
+      "male",
+      "div4.csv"
+    ) |>
+      read_csv() |>
+      mutate(
+        division = 4
+      )
+  ) |>
+  bind_rows(
+    here(
+      "data",
+      "male",
+      "div5.csv"
+    ) |>
+      read_csv() |>
+      mutate(
+        division = 5
+      )
+  ) |>
   arrange(desc(dags)) |>
   filter(
     timabil >= from_season
   )
 
-teams <- unique(c(results$heima, results$gestir))
+teams <- results |>
+  pivot_longer(c(heima, gestir)) |>
+  summarise(
+    n = n(),
+    first_game = min(dags),
+    last_game = max(dags),
+    .by = value
+  ) |>
+  filter(
+    n > 10,
+    year(last_game) >= 2024
+  ) |>
+  pull(value)
 
 cup_games <- here(
   "data",
@@ -70,12 +104,7 @@ cup_games <- here(
 ) |>
   read_csv() |>
   mutate(
-    division = 4
-  ) |>
-  filter(
-    heima %in% teams,
-    gestir %in% teams,
-    timabil >= from_season
+    division = max(results$division) + 1
   ) |>
   bind_rows(
     here(
@@ -85,9 +114,15 @@ cup_games <- here(
     ) |>
       read_csv() |>
       mutate(
-        division = 5
+        division = max(results$division) + 2
       )
+  ) |>
+  filter(
+    heima %in% teams,
+    gestir %in% teams,
+    timabil >= from_season
   )
+
 results |>
   bind_rows(
     cup_games
@@ -119,6 +154,39 @@ schedule <- here(
       mutate(
         division = 2
       )
+  ) |>
+  bind_rows(
+    here(
+      "data",
+      "male",
+      "schedule_div3.csv"
+    ) |>
+      read_csv() |>
+      mutate(
+        division = 3
+      )
+  ) |>
+  bind_rows(
+    here(
+      "data",
+      "male",
+      "schedule_div4.csv"
+    ) |>
+      read_csv() |>
+      mutate(
+        division = 4
+      )
+  ) |>
+  bind_rows(
+    here(
+      "data",
+      "male",
+      "schedule_div5.csv"
+    ) |>
+      read_csv() |>
+      mutate(
+        division = 5
+      )
   )
 
 cup_schedule <- here(
@@ -128,7 +196,7 @@ cup_schedule <- here(
 ) |>
   read_csv() |>
   mutate(
-    division = 4
+    division = max(results$division) + 1
   ) |>
   filter(
     heima %in% teams,

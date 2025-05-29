@@ -1,112 +1,148 @@
 date,home,away,division,game_nr,home_timediff,away_timediff
-2025-05-15,KA,Fram,4,1,4,5
-2025-05-15,Breiðablik,Vestri,4,2,4,5
-2025-05-16,Fjölnir,Fylkir,2,3,6,7
-2025-05-16,Njarðvík,ÍR,2,4,6,7
-2025-05-16,Leiknir R.,HK,2,5,7,7
-2025-05-17,Selfoss,Völsungur,2,6,4,7
-2025-05-18,Fram,Vestri,1,7,3,3
-2025-05-18,ÍBV,KA,1,8,4,3
-2025-05-18,Afturelding,KR,1,9,4,4
-2025-05-18,Stjarnan,Víkingur R.,1,10,4,7
-2025-05-18,Þór,Keflavík,2,11,5,4
-2025-05-18,Þróttur R.,Grindavík,2,12,4,8
-2025-05-19,Breiðablik,Valur,1,13,4,5
-2025-05-19,ÍA,FH,1,14,5,8
-2025-05-23,ÍR,Selfoss,2,15,7,6
-2025-05-23,Fylkir,Þróttur R.,2,16,7,5
-2025-05-23,Keflavík,Leiknir R.,2,17,5,7
-2025-05-23,HK,Njarðvík,2,18,7,7
-2025-05-24,Valur,ÍBV,1,19,5,6
-2025-05-24,KA,Afturelding,1,20,6,6
-2025-05-24,Víkingur R.,ÍA,1,21,6,5
-2025-05-24,Vestri,Stjarnan,1,22,6,6
-2025-05-24,Grindavík,Þór,2,23,6,6
-2025-05-24,Völsungur,Fjölnir,2,24,7,8
-2025-05-25,FH,Breiðablik,1,25,6,6
-2025-05-25,KR,Fram,1,26,7,7
-2025-05-29,Vestri,Víkingur R.,1,27,5,5
-2025-05-29,Fram,KA,1,28,4,5
-2025-05-29,ÍBV,FH,1,29,5,4
-2025-05-29,Afturelding,Valur,1,30,5,5
-2025-05-29,Breiðablik,ÍA,1,31,4,5
-2025-05-29,Stjarnan,KR,1,32,5,4
-2025-05-29,Þróttur R.,Völsungur,2,33,6,5
-2025-06-01,KR,Vestri,1,34,3,3
-2025-06-01,ÍA,ÍBV,1,35,3,3
-2025-06-01,KA,Stjarnan,1,36,3,3
-2025-06-01,Valur,Fram,1,37,3,3
-2025-06-01,Breiðablik,Víkingur R.,1,38,3,3
-2025-06-01,FH,Afturelding,1,39,3,3
-2025-06-15,Vestri,KA,1,40,14,14
-2025-06-15,ÍBV,Breiðablik,1,41,14,14
-2025-06-15,Fram,FH,1,42,14,14
-2025-06-15,Víkingur R.,KR,1,43,14,14
-2025-06-15,Afturelding,ÍA,1,44,14,14
-2025-06-16,Stjarnan,Valur,1,45,15,15
-2025-06-22,FH,Vestri,1,46,7,7
-2025-06-22,ÍA,Stjarnan,1,47,7,6
-2025-06-22,KA,Víkingur R.,1,48,7,7
-2025-06-22,Breiðablik,Fram,1,49,7,7
-2025-06-23,ÍBV,Afturelding,1,50,8,8
-2025-06-23,Valur,KR,1,51,7,8
-2025-06-26,Stjarnan,Breiðablik,1,52,4,4
-2025-06-28,KA,Valur,1,53,6,5
-2025-06-29,Fram,ÍBV,1,54,7,6
-2025-06-29,Vestri,ÍA,1,55,7,7
-2025-06-29,Víkingur R.,Afturelding,1,56,7,6
-2025-06-29,KR,FH,1,57,6,7
-2025-07-03,Afturelding,Breiðablik,1,58,4,7
-2025-07-05,ÍA,Fram,1,59,6,6
-2025-07-05,Vestri,Valur,1,60,6,7
-2025-07-05,ÍBV,Víkingur R.,1,61,6,6
-2025-07-06,KR,KA,1,62,7,8
-2025-07-07,FH,Stjarnan,1,63,8,11
-2025-07-14,ÍBV,Stjarnan,1,64,9,7
-2025-07-14,ÍA,KR,1,65,9,8
-2025-07-14,Afturelding,Fram,1,66,11,9
-2025-07-19,Breiðablik,Vestri,1,67,16,14
-2025-07-20,FH,KA,1,68,13,14
-2025-07-20,Víkingur R.,Valur,1,69,15,15
-2025-07-27,Vestri,ÍBV,1,70,8,13
-2025-07-27,KR,Breiðablik,1,71,13,8
-2025-07-27,Valur,FH,1,72,7,7
-2025-07-27,KA,ÍA,1,73,7,13
-2025-07-27,Fram,Víkingur R.,1,74,13,7
-2025-07-28,Stjarnan,Afturelding,1,75,14,14
-2025-08-02,ÍBV,KR,1,76,6,6
-2025-08-05,FH,Víkingur R.,1,77,9,9
-2025-08-05,ÍA,Valur,1,78,9,9
-2025-08-05,Breiðablik,KA,1,79,9,9
-2025-08-06,Afturelding,Vestri,1,80,9,10
-2025-08-06,Fram,Stjarnan,1,81,10,9
-2025-08-10,KA,ÍBV,1,82,5,8
-2025-08-10,Vestri,Fram,1,83,4,4
-2025-08-10,Víkingur R.,Stjarnan,1,84,5,4
-2025-08-10,Valur,Breiðablik,1,85,5,5
-2025-08-11,KR,Afturelding,1,86,9,5
-2025-08-11,FH,ÍA,1,87,6,6
-2025-08-17,Stjarnan,Vestri,1,88,7,7
-2025-08-17,ÍBV,Valur,1,89,7,7
-2025-08-17,Afturelding,KA,1,90,6,7
-2025-08-17,ÍA,Víkingur R.,1,91,6,7
-2025-08-17,Breiðablik,FH,1,92,7,6
-2025-08-18,Fram,KR,1,93,8,7
-2025-08-24,Víkingur R.,Vestri,1,94,7,7
-2025-08-24,KA,Fram,1,95,7,6
-2025-08-24,ÍA,Breiðablik,1,96,7,7
-2025-08-24,FH,ÍBV,1,97,7,7
-2025-08-25,KR,Stjarnan,1,98,7,8
-2025-08-25,Valur,Afturelding,1,99,8,8
-2025-08-31,Vestri,KR,1,100,7,6
-2025-08-31,ÍBV,ÍA,1,101,7,7
-2025-08-31,Afturelding,FH,1,102,6,7
-2025-08-31,Stjarnan,KA,1,103,6,7
-2025-08-31,Fram,Valur,1,104,7,6
-2025-08-31,Víkingur R.,Breiðablik,1,105,7,7
-2025-09-14,FH,Fram,1,106,14,14
-2025-09-14,KR,Víkingur R.,1,107,14,14
-2025-09-14,ÍA,Afturelding,1,108,14,14
-2025-09-14,Breiðablik,ÍBV,1,109,14,14
-2025-09-14,KA,Vestri,1,110,14,14
-2025-09-14,Valur,Stjarnan,1,111,14,14
+2025-05-29,Vestri,Víkingur R.,1,1,5,5
+2025-05-29,Fram,KA,1,2,6,5
+2025-05-29,ÍBV,FH,1,3,5,4
+2025-05-29,Afturelding,Valur,1,4,5,5
+2025-05-29,Breiðablik,ÍA,1,5,4,5
+2025-05-29,Stjarnan,KR,1,6,5,6
+2025-05-29,Þróttur R.,Völsungur,2,7,6,5
+2025-05-29,Dalvík/Reynir,Kári,3,8,6,5
+2025-05-29,Árbær,KFK,4,9,5,5
+2025-05-29,Kría,KFS,5,10,7,5
+2025-05-29,Elliði,KÁ,5,11,7,8
+2025-05-29,Hamar,Vængir Júpiters,5,12,8,5
+2025-05-29,Álftanes,KH,5,13,8,8
+2025-05-29,Hafnir,Árborg,5,14,7,7
+2025-05-30,Þór,Fylkir,2,15,6,7
+2025-05-30,Fjölnir,ÍR,2,16,6,7
+2025-05-30,Keflavík,HK,2,17,7,7
+2025-05-30,Selfoss,Njarðvík,2,18,7,7
+2025-05-30,Leiknir R.,Grindavík,2,19,7,6
+2025-05-30,Reynir S.,Ýmir,4,20,6,6
+2025-05-31,KFA,Þróttur V.,3,21,7,8
+2025-05-31,KFG,Höttur/Huginn,3,22,8,7
+2025-05-31,Víkingur Ó.,Kormákur/Hvöt,3,23,7,7
+2025-05-31,Víðir,Grótta,3,24,7,8
+2025-05-31,Ægir,Haukar,3,25,7,7
+2025-05-31,Magni,KV,4,26,7,7
+2025-05-31,Augnablik,Tindastóll,4,27,8,7
+2025-05-31,KF,ÍH,4,28,7,8
+2025-05-31,Hvíti riddarinn,Sindri,4,29,7,7
+2025-06-01,KR,Vestri,1,30,3,3
+2025-06-01,ÍA,ÍBV,1,31,3,3
+2025-06-01,KA,Stjarnan,1,32,3,3
+2025-06-01,Valur,Fram,1,33,3,3
+2025-06-01,Breiðablik,Víkingur R.,1,34,3,3
+2025-06-01,FH,Afturelding,1,35,3,3
+2025-06-03,KH,Elliði,5,36,5,5
+2025-06-04,Njarðvík,Fjölnir,2,37,5,5
+2025-06-04,Fylkir,Leiknir R.,2,38,5,5
+2025-06-04,Grindavík,Keflavík,2,39,5,5
+2025-06-04,HK,Selfoss,2,40,5,5
+2025-06-04,ÍR,Þróttur R.,2,41,5,6
+2025-06-04,Völsungur,Þór,2,42,6,5
+2025-06-04,Kári,Víðir,3,43,6,4
+2025-06-04,Höttur/Huginn,KFA,3,44,4,4
+2025-06-04,Þróttur V.,Ægir,3,45,4,4
+2025-06-04,Haukar,Víkingur Ó.,3,46,4,4
+2025-06-04,Grótta,KFG,3,47,4,4
+2025-06-04,Kormákur/Hvöt,Dalvík/Reynir,3,48,4,6
+2025-06-04,ÍH,Magni,4,49,4,4
+2025-06-04,Sindri,Reynir S.,4,50,4,5
+2025-06-04,KV,Árbær,4,51,4,6
+2025-06-04,KFK,Hvíti riddarinn,4,52,6,4
+2025-06-04,Tindastóll,KF,4,53,4,4
+2025-06-05,Ýmir,Augnablik,4,54,6,5
+2025-06-05,KÁ,Hafnir,5,55,7,7
+2025-06-05,Árborg,Kría,5,56,7,7
+2025-06-05,Vængir Júpiters,Álftanes,5,57,7,7
+2025-06-07,KFS,Hamar,5,58,9,9
+2025-06-09,Leiknir R.,Völsungur,2,59,5,5
+2025-06-09,Þór,ÍR,2,60,5,5
+2025-06-09,Fjölnir,Selfoss,2,61,5,5
+2025-06-09,Grindavík,HK,2,62,5,5
+2025-06-09,Þróttur R.,Njarðvík,2,63,5,5
+2025-06-09,Keflavík,Fylkir,2,64,5,5
+2025-06-09,KFA,Grótta,3,65,5,5
+2025-06-09,Víkingur Ó.,Þróttur V.,3,66,5,5
+2025-06-09,KFG,Kári,3,67,5,5
+2025-06-09,Ægir,Höttur/Huginn,3,68,5,5
+2025-06-09,Haukar,Kormákur/Hvöt,3,69,5,5
+2025-06-09,Víðir,Dalvík/Reynir,3,70,5,5
+2025-06-09,Magni,Tindastóll,4,71,5,5
+2025-06-09,KV,KFK,4,72,5,5
+2025-06-09,Reynir S.,Hvíti riddarinn,4,73,5,5
+2025-06-09,Augnablik,Sindri,4,74,4,5
+2025-06-09,KF,Ýmir,4,75,5,4
+2025-06-15,Vestri,KA,1,76,14,14
+2025-06-15,ÍBV,Breiðablik,1,77,14,14
+2025-06-15,Fram,FH,1,78,14,14
+2025-06-15,Víkingur R.,KR,1,79,14,14
+2025-06-15,Afturelding,ÍA,1,80,14,14
+2025-06-16,Stjarnan,Valur,1,81,15,15
+2025-06-22,FH,Vestri,1,82,7,7
+2025-06-22,ÍA,Stjarnan,1,83,7,6
+2025-06-22,KA,Víkingur R.,1,84,7,7
+2025-06-22,Breiðablik,Fram,1,85,7,7
+2025-06-23,ÍBV,Afturelding,1,86,8,8
+2025-06-23,Valur,KR,1,87,7,8
+2025-06-26,Stjarnan,Breiðablik,1,88,4,4
+2025-06-28,KA,Valur,1,89,6,5
+2025-06-29,Fram,ÍBV,1,90,7,6
+2025-06-29,Vestri,ÍA,1,91,7,7
+2025-06-29,Víkingur R.,Afturelding,1,92,7,6
+2025-06-29,KR,FH,1,93,6,7
+2025-07-03,Afturelding,Breiðablik,1,94,4,7
+2025-07-05,ÍA,Fram,1,95,6,6
+2025-07-05,Vestri,Valur,1,96,6,7
+2025-07-05,ÍBV,Víkingur R.,1,97,6,6
+2025-07-06,KR,KA,1,98,7,8
+2025-07-07,FH,Stjarnan,1,99,8,11
+2025-07-14,ÍBV,Stjarnan,1,100,9,7
+2025-07-14,ÍA,KR,1,101,9,8
+2025-07-14,Afturelding,Fram,1,102,11,9
+2025-07-19,Breiðablik,Vestri,1,103,16,14
+2025-07-20,FH,KA,1,104,13,14
+2025-07-20,Víkingur R.,Valur,1,105,15,15
+2025-07-27,Vestri,ÍBV,1,106,8,13
+2025-07-27,KR,Breiðablik,1,107,13,8
+2025-07-27,Valur,FH,1,108,7,7
+2025-07-27,KA,ÍA,1,109,7,13
+2025-07-27,Fram,Víkingur R.,1,110,13,7
+2025-07-28,Stjarnan,Afturelding,1,111,14,14
+2025-08-02,ÍBV,KR,1,112,6,6
+2025-08-05,FH,Víkingur R.,1,113,9,9
+2025-08-05,ÍA,Valur,1,114,9,9
+2025-08-05,Breiðablik,KA,1,115,9,9
+2025-08-06,Afturelding,Vestri,1,116,9,10
+2025-08-06,Fram,Stjarnan,1,117,10,9
+2025-08-10,KA,ÍBV,1,118,5,8
+2025-08-10,Vestri,Fram,1,119,4,4
+2025-08-10,Víkingur R.,Stjarnan,1,120,5,4
+2025-08-10,Valur,Breiðablik,1,121,5,5
+2025-08-11,KR,Afturelding,1,122,9,5
+2025-08-11,FH,ÍA,1,123,6,6
+2025-08-17,Stjarnan,Vestri,1,124,7,7
+2025-08-17,ÍBV,Valur,1,125,7,7
+2025-08-17,Afturelding,KA,1,126,6,7
+2025-08-17,ÍA,Víkingur R.,1,127,6,7
+2025-08-17,Breiðablik,FH,1,128,7,6
+2025-08-18,Fram,KR,1,129,8,7
+2025-08-24,Víkingur R.,Vestri,1,130,7,7
+2025-08-24,KA,Fram,1,131,7,6
+2025-08-24,ÍA,Breiðablik,1,132,7,7
+2025-08-24,FH,ÍBV,1,133,7,7
+2025-08-25,KR,Stjarnan,1,134,7,8
+2025-08-25,Valur,Afturelding,1,135,8,8
+2025-08-31,Vestri,KR,1,136,7,6
+2025-08-31,ÍBV,ÍA,1,137,7,7
+2025-08-31,Afturelding,FH,1,138,6,7
+2025-08-31,Stjarnan,KA,1,139,6,7
+2025-08-31,Fram,Valur,1,140,7,6
+2025-08-31,Víkingur R.,Breiðablik,1,141,7,7
+2025-09-14,FH,Fram,1,142,14,14
+2025-09-14,KR,Víkingur R.,1,143,14,14
+2025-09-14,ÍA,Afturelding,1,144,14,14
+2025-09-14,Breiðablik,ÍBV,1,145,14,14
+2025-09-14,KA,Vestri,1,146,14,14
+2025-09-14,Valur,Stjarnan,1,147,14,14

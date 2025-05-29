@@ -21,6 +21,7 @@ d <- read_csv(here("results", "male", "d.csv"))
 teams <- read_csv(here("results", "male", "teams.csv"))
 next_games <- read_csv(here("results", "male", "next_games.csv"))
 top_teams <- read_csv(here("results", "male", "top_teams.csv"))
+pred_d <- read_csv(here("results", "male", "pred_d.csv"))
 
 
 #### Next-Round Predictions ####
@@ -39,7 +40,7 @@ posterior_goals <- results$draws(c("goals1_pred", "goals2_pred")) |>
   ) |>
   select(.draw, type, game_nr, value) |>
   pivot_wider(names_from = type, values_from = value) |>
-  inner_join(next_games, by = "game_nr") |>
+  inner_join(pred_d, by = "game_nr") |>
   filter(
     date < today() + 7 + 1,
     date > today()
@@ -75,7 +76,8 @@ predictions <- posterior_goals |>
     .by = c(home, away)
   ) |>
   filter(
-    abs(goal_diff) <= 9
+    abs(goal_diff) <= 9,
+    division %in% c(1, 2, 7)
   ) |>
   count(date, division, home, away, goal_diff, game_nr) |>
   mutate(
@@ -88,10 +90,11 @@ predictions <- posterior_goals |>
     .by = c(home, away)
   ) |>
   mutate(
+    game_nr = as.numeric(as.factor(game_nr)),
     game_nr = max(game_nr) - game_nr + 1,
     match = str_c(home, " - ", away) |>
       fct_reorder(game_nr),
-    division = c("BD", "LD", "ÖD", "MB")[division]
+    division = c("BD", "LD", "ÖD", "ÞD", "FjD", "FiD", "MB")[division]
   ) |>
   mutate(
     home = glue(
@@ -281,7 +284,7 @@ posterior_goals <- results$draws(c("goals1_pred", "goals2_pred")) |>
   ) |>
   select(.draw, type, game_nr, value) |>
   pivot_wider(names_from = type, values_from = value) |>
-  inner_join(next_games, by = "game_nr") |>
+  inner_join(pred_d, by = "game_nr") |>
   filter(
     division == 1
   ) |>
@@ -574,7 +577,7 @@ plot_dat_away <- results$draws("cur_strength_away") |>
   as_tibble() |>
   pivot_longer(c(-.chain, -.draw, -.iteration)) |>
   mutate(
-    team = top_teams$team[parse_number(name)],
+    team = teams$team[parse_number(name)],
     type = "Samtals"
   ) |>
   bind_rows(
@@ -583,7 +586,7 @@ plot_dat_away <- results$draws("cur_strength_away") |>
       as_tibble() |>
       pivot_longer(c(-.chain, -.draw, -.iteration)) |>
       mutate(
-        team = top_teams$team[parse_number(name)],
+        team = teams$team[parse_number(name)],
         type = "Sókn"
       )
   ) |>
@@ -593,7 +596,7 @@ plot_dat_away <- results$draws("cur_strength_away") |>
       as_tibble() |>
       pivot_longer(c(-.chain, -.draw, -.iteration)) |>
       mutate(
-        team = top_teams$team[parse_number(name)],
+        team = teams$team[parse_number(name)],
         type = "Vörn"
       )
   ) |>
@@ -618,7 +621,7 @@ plot_dat_home <- results$draws("cur_strength_home") |>
   as_tibble() |>
   pivot_longer(c(-.chain, -.draw, -.iteration)) |>
   mutate(
-    team = top_teams$team[parse_number(name)],
+    team = teams$team[parse_number(name)],
     type = "Samtals"
   ) |>
   bind_rows(
@@ -627,7 +630,7 @@ plot_dat_home <- results$draws("cur_strength_home") |>
       as_tibble() |>
       pivot_longer(c(-.chain, -.draw, -.iteration)) |>
       mutate(
-        team = top_teams$team[parse_number(name)],
+        team = teams$team[parse_number(name)],
         type = "Sókn"
       )
   ) |>
@@ -637,7 +640,7 @@ plot_dat_home <- results$draws("cur_strength_home") |>
       as_tibble() |>
       pivot_longer(c(-.chain, -.draw, -.iteration)) |>
       mutate(
-        team = top_teams$team[parse_number(name)],
+        team = teams$team[parse_number(name)],
         type = "Vörn"
       )
   ) |>
@@ -670,6 +673,12 @@ plot_dat <- plot_dat_away |>
   mutate(
     loc = as_factor(loc) |>
       fct_relevel("Heima")
+  ) |>
+  semi_join(
+    d |>
+      filter(season == 2025, division == 1) |>
+      pivot_longer(c(home, away), values_to = "team") |>
+      distinct(team)
   )
 
 dodge <- 0.3
@@ -684,7 +693,7 @@ plot_dat |>
   ) |>
   ggplot(aes(median, team)) +
   geom_hline(
-    yintercept = seq(1, 10, 2),
+    yintercept = seq(1, 12, 2),
     linewidth = 8,
     alpha = 0.05
   ) +

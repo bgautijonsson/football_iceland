@@ -7,13 +7,16 @@ library(here)
 # Source the historical evaluation function
 source(here("R", "historical_evaluation.R"))
 
-run_historical_evaluation <- function(sex = "male", window_years = 3) {
+run_historical_evaluation <- function(sex = "male") {
   # Read data
   d <- read_csv(here("data", sex, "data.csv"))
 
   # Get all unique game dates
   game_dates <- d |>
-    filter(dags < max(dags)) |>
+    filter(
+      timabil == 2025,
+      division %in% c(1)
+    ) |>
     arrange(dags) |>
     pull(dags) |>
     unique() |>
@@ -31,12 +34,6 @@ run_historical_evaluation <- function(sex = "male", window_years = 3) {
   # Loop over dates in reverse
   for (i in seq_along(game_dates)) {
     end_date <- game_dates[i]
-    start_date <- end_date - years(window_years)
-
-    # Skip if we don't have enough historical data
-    if (start_date < min(game_dates)) {
-      next
-    }
 
     # Skip if we've already processed this date
     if (
@@ -45,7 +42,8 @@ run_historical_evaluation <- function(sex = "male", window_years = 3) {
           "results",
           sex,
           "historical",
-          paste0(format(end_date, "%Y-%m-%d"), ".csv")
+          end_date,
+          "posterior_goals.csv"
         )
       )
     ) {
@@ -57,7 +55,7 @@ run_historical_evaluation <- function(sex = "male", window_years = 3) {
       {
         message(glue("Processing {format(end_date, '%Y-%m-%d')}"))
         fit_historical_model(
-          start_date = start_date,
+          start_date = clock::date_build(2021, 1, 1),
           end_date = end_date,
           sex = sex
         )
@@ -72,4 +70,4 @@ run_historical_evaluation <- function(sex = "male", window_years = 3) {
 }
 
 # Example usage:
-run_historical_evaluation(sex = "male", window_years = 3)
+run_historical_evaluation(sex = "female")

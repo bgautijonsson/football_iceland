@@ -70,6 +70,7 @@ read_csv(
   write_csv(
     here(
       "data",
+      "female",
       "div2.csv"
     )
   )

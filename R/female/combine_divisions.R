@@ -61,7 +61,19 @@ results <- here(
     timabil >= from_season
   )
 
-teams <- unique(c(results$heima, results$gestir))
+teams <- results |>
+  pivot_longer(c(heima, gestir)) |>
+  summarise(
+    n = n(),
+    first_game = min(dags),
+    last_game = max(dags),
+    .by = value
+  ) |>
+  filter(
+    n > 10,
+    year(last_game) >= 2024
+  ) |>
+  pull(value)
 
 cup_games <- here(
   "data",
