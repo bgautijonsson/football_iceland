@@ -70,4 +70,5 @@ run_historical_evaluation <- function(sex = "male") {
 }
 
 # Example usage:
+run_historical_evaluation(sex = "male")
 run_historical_evaluation(sex = "female")

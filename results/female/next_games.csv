@@ -1,19 +1,19 @@
 date,home,away,division,game_nr,home_timediff,away_timediff
-2025-05-27,Afturelding,ÍBV,2,1,1,1
-2025-05-28,Keflavík,HK,2,2,6,6
-2025-05-28,Grótta,ÍA,2,3,6,6
-2025-05-28,Haukar,Grindavík/ Njarðvík,2,4,6,6
-2025-05-28,KR,Fylkir,2,5,6,6
-2025-06-05,ÍBV,Keflavík,2,6,9,8
-2025-06-05,Grindavík/ Njarðvík,KR,2,7,8,8
-2025-06-05,Grótta,Haukar,2,8,8,8
-2025-06-05,Fylkir,Afturelding,2,9,8,9
-2025-06-05,ÍA,HK,2,10,8,8
-2025-06-07,Víkingur R.,FH,1,11,15,15
-2025-06-07,Breiðablik,FHL,1,12,15,13
-2025-06-07,Fram,Stjarnan,1,13,15,14
-2025-06-07,Tindastóll,Valur,1,14,15,15
-2025-06-07,Þróttur R.,Þór/KA,1,15,13,14
+2025-06-05,ÍBV,Keflavík,2,1,10,8
+2025-06-05,Grindavík/ Njarðvík,KR,2,2,8,8
+2025-06-05,Grótta,Haukar,2,3,8,8
+2025-06-05,Fylkir,Afturelding,2,4,8,10
+2025-06-05,ÍA,HK,2,5,8,8
+2025-06-07,Víkingur R.,FH,1,6,15,15
+2025-06-07,Breiðablik,FHL,1,7,15,13
+2025-06-07,Fram,Stjarnan,1,8,15,14
+2025-06-07,Tindastóll,Valur,1,9,15,15
+2025-06-07,Þróttur R.,Þór/KA,1,10,13,14
+2025-06-12,HK,ÍBV,2,11,7,7
+2025-06-12,Afturelding,Grindavík/ Njarðvík,2,12,7,7
+2025-06-12,KR,Grótta,2,13,7,7
+2025-06-12,Keflavík,Fylkir,2,14,7,7
+2025-06-12,Haukar,ÍA,2,15,7,7
 2025-06-15,FHL,Víkingur R.,1,16,8,8
 2025-06-15,Valur,Fram,1,17,8,8
 2025-06-15,Stjarnan,Þróttur R.,1,18,8,8

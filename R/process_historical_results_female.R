@@ -5,7 +5,7 @@ theme_set(theme_metill())
 Sys.setlocale("LC_ALL", "is_IS.UTF-8")
 
 sex <- "female"
-ncol <- if (sex == "female") 4 else 5
+ncol <- if (sex == "female") 5 else 4
 
 aspect_ratio <- 0.6
 breaks <- breaks_pretty(10)

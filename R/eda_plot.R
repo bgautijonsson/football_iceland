@@ -60,10 +60,9 @@ plot_dat |>
   filter(
     team %in%
       c(
-        "Breiðablik",
+        "KR",
         "Víkingur R.",
-        "Vestri",
-        "Valur"
+        "Vestri"
       )
   ) |>
   inner_join(
