@@ -76,7 +76,8 @@ predictions <- posterior_goals |>
     .by = c(home, away)
   ) |>
   filter(
-    abs(goal_diff) <= 9
+    abs(goal_diff) <= 9,
+    division %in% c(1, 2, 4)
   ) |>
   count(date, division, home, away, goal_diff, game_nr) |>
   mutate(
@@ -89,6 +90,7 @@ predictions <- posterior_goals |>
     .by = c(home, away)
   ) |>
   mutate(
+    game_nr = as.numeric(as.factor(game_nr)),
     game_nr = max(game_nr) - game_nr + 1,
     match = str_c(home, " - ", away) |>
       fct_reorder(game_nr),

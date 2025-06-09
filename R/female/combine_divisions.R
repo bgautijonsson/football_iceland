@@ -131,6 +131,17 @@ schedule <- here(
       mutate(
         division = 2
       )
+  ) |>
+  bind_rows(
+    here(
+      "data",
+      "female",
+      "schedule_div3.csv"
+    ) |>
+      read_csv() |>
+      mutate(
+        division = 3
+      )
   )
 
 cup_schedule <- here(

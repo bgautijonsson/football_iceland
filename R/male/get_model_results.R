@@ -337,7 +337,7 @@ p_top <- posterior_goals |>
       result == name ~ 3,
       TRUE ~ 0
     )
-  ) |> 
+  ) |>
   summarise(
     points = sum(points),
     .by = c(iteration, team)

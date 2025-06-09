@@ -61,7 +61,7 @@ plot_dat |>
     team %in%
       c(
         "KR",
-        "Víkingur R.",
+        # "Víkingur R.",
         "Vestri"
       )
   ) |>
@@ -122,88 +122,17 @@ plot_dat |>
   ) +
   facet_wrap("variable", ncol = 1) +
   labs(
-    title = "Þróun styrks nokkurra félagsliða",
+    title = "Þróun styrks nokkurra félagsliða í Bestu Deild karla",
     x = NULL,
     y = NULL,
     col = NULL,
     fill = NULL
   )
 
-
-results$summary("sigma_off")
-
-
-
-
-model_d |> 
-  select(
-    date, 
-    game_nr,
-    team_home = home, 
-    team_away = away, 
-    round_home = home_round, 
-    round_away = away_round
-  ) |> 
-  pivot_longer(
-    cols = !c(date, game_nr),
-    names_to = c(".value", "type"),
-    names_sep = "_"
-  ) |> 
-  mutate(
-    opponent = team[((row_number()) %% 2) + 1],
-    .by = game_nr
-  ) |> 
-  inner_join(
-    plot_dat |> 
-      select(round, team, median, variable) |> 
-      pivot_wider(names_from = variable, values_from = median) |> 
-      rename(
-        offense = Sóknarstyrkur,
-        defense = Varnarstyrkur
-      ) |> 
-      mutate(
-        strength = offense + defense
-      ),
-    by = join_by(round, opponent == team)
-  ) |> 
-  inner_join(
-    model_d |> 
-      select(game_nr, division, season)
-  ) |> 
-  filter(
-    season == 2025, division == 1
-  ) |> 
-  arrange(date) |> 
-  # filter(
-  #   team %in% c(
-  #     "Víkingur R.",
-  #     "Vestri",
-  #     "Breiðablik",
-  #     "Valur",
-  #     "KR"
-  #   )
-  # ) |> 
-  summarise(
-    mean = mean(strength),
-    .by = team
-  ) |> 
-  mutate(
-    team = fct_reorder(team, mean)
-  ) |> 
-  ggplot(aes(mean, team)) +
-  geom_segment(
-    aes(xend = 0, yend = team)
-  ) +
-  geom_point() +
-  scale_x_continuous(
-    guide = ggh4x::guide_axis_truncated()
-  ) +
-  scale_y_discrete(
-    guide = ggh4x::guide_axis_truncated()
-  ) +
-  labs(
-    x = NULL,
-    y = NULL,
-    title = "Meðalstyrkur mótherja hingað til á tímabilinu"
-  )
+ggsave(
+  filename = "temp_male.png",
+  width = 8,
+  height = 0.5 * 8,
+  scale = 1.4
+)
 

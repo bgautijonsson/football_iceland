@@ -54,8 +54,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,2,2021-05-22,Afturelding,HK,6,2,53
 2021,2,2021-05-22,Augnablik,FH,1,4,54
 2021,3,2021-05-22,Fjölnir,Einherji,3,0,55
-2021,3,2021-05-22,Álftanes,FHL,1,5,56
-2021,3,2021-05-22,Sindri,Fram,1,4,57
+2021,3,2021-05-22,Sindri,Fram,1,4,56
+2021,3,2021-05-22,Álftanes,FHL,1,5,57
 2021,3,2021-05-22,Hamrarnir,SR,2,1,58
 2021,3,2021-05-24,Völsungur,KH,2,0,59
 2021,1,2021-05-26,Stjarnan,Þróttur R.,1,5,60
@@ -92,12 +92,12 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,2,2021-06-06,Grótta,Afturelding,1,3,91
 2021,2,2021-06-06,ÍA,FH,0,3,92
 2021,3,2021-06-06,Hamar,FHL,0,2,93
-2021,3,2021-06-06,Sindri,KH,1,4,94
-2021,3,2021-06-06,Hamrarnir,KM,9,0,95
+2021,3,2021-06-06,Hamrarnir,KM,9,0,94
+2021,3,2021-06-06,Sindri,KH,1,4,95
 2021,2,2021-06-07,KR,Grindavík,5,2,96
-2021,3,2021-06-07,Fram,SR,1,0,97
+2021,3,2021-06-07,Fjölnir,ÍR,3,1,97
 2021,3,2021-06-07,Völsungur,Einherji,1,0,98
-2021,3,2021-06-07,Fjölnir,ÍR,3,1,99
+2021,3,2021-06-07,Fram,SR,1,0,99
 2021,1,2021-06-10,Fylkir,Tindastóll,2,1,100
 2021,3,2021-06-11,KH,Fram,2,1,101
 2021,3,2021-06-11,FHL,Völsungur,7,0,102
@@ -110,9 +110,9 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,2,2021-06-15,HK,FH,1,2,109
 2021,2,2021-06-15,Grindavík,ÍA,2,3,110
 2021,2,2021-06-15,Afturelding,Augnablik,1,1,111
-2021,3,2021-06-18,Fram,KM,4,0,112
+2021,3,2021-06-18,SR,KH,0,1,112
 2021,3,2021-06-18,Hamar,Álftanes,2,0,113
-2021,3,2021-06-18,SR,KH,0,1,114
+2021,3,2021-06-18,Fram,KM,4,0,114
 2021,1,2021-06-19,Keflavík,Tindastóll,1,0,115
 2021,3,2021-06-19,Hamrarnir,FHL,1,4,116
 2021,3,2021-06-20,Völsungur,ÍR,1,0,117
@@ -157,8 +157,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,2,2021-07-08,Grindavík,Víkingur R.,1,1,156
 2021,2,2021-07-09,FH,Afturelding,1,1,157
 2021,3,2021-07-10,Hamrarnir,Álftanes,2,0,158
-2021,3,2021-07-10,SR,Einherji,1,1,159
-2021,3,2021-07-10,Fram,FHL,4,3,160
+2021,3,2021-07-10,Fram,FHL,4,3,159
+2021,3,2021-07-10,SR,Einherji,1,1,160
 2021,1,2021-07-11,Þór/KA,ÍBV,1,1,161
 2021,1,2021-07-11,Þróttur R.,Tindastóll,2,0,162
 2021,3,2021-07-11,Sindri,ÍR,0,3,163
@@ -174,8 +174,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,4,2021-07-16,Þróttur R.,FH,4,0,173
 2021,4,2021-07-16,Breiðablik,Valur,4,3,174
 2021,3,2021-07-17,Einherji,KH,1,3,175
-2021,3,2021-07-17,Álftanes,Sindri,0,2,176
-2021,3,2021-07-17,Fjölnir,Hamrarnir,1,1,177
+2021,3,2021-07-17,Fjölnir,Hamrarnir,1,1,176
+2021,3,2021-07-17,Álftanes,Sindri,0,2,177
 2021,3,2021-07-17,FHL,SR,8,1,178
 2021,3,2021-07-18,Hamar,Völsungur,1,1,179
 2021,1,2021-07-20,Tindastóll,Fylkir,2,1,180
@@ -216,8 +216,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,2,2021-08-06,Grótta,Víkingur R.,0,3,215
 2021,2,2021-08-07,Haukar,Afturelding,2,6,216
 2021,3,2021-08-07,Hamar,Sindri,0,2,217
-2021,3,2021-08-08,Álftanes,SR,3,1,218
-2021,3,2021-08-08,FHL,KM,24,0,219
+2021,3,2021-08-08,FHL,KM,24,0,218
+2021,3,2021-08-08,Álftanes,SR,3,1,219
 2021,1,2021-08-09,Selfoss,Þróttur R.,2,2,220
 2021,3,2021-08-09,Fjölnir,Fram,0,0,221
 2021,3,2021-08-09,ÍR,KH,3,2,222
@@ -229,8 +229,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,1,2021-08-13,Breiðablik,Valur,0,1,228
 2021,2,2021-08-14,Víkingur R.,Augnablik,2,1,229
 2021,3,2021-08-15,Einherji,FHL,1,1,230
-2021,3,2021-08-16,KH,Álftanes,4,0,231
-2021,3,2021-08-16,SR,Fjölnir,0,4,232
+2021,3,2021-08-16,SR,Fjölnir,0,4,231
+2021,3,2021-08-16,KH,Álftanes,4,0,232
 2021,3,2021-08-16,Fram,Hamar,4,0,233
 2021,1,2021-08-17,Þór/KA,Tindastóll,1,0,234
 2021,1,2021-08-17,ÍBV,Keflavík,1,2,235
@@ -242,9 +242,9 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2021,2,2021-08-20,Grótta,Haukar,1,2,241
 2021,2,2021-08-20,ÍA,Grindavík,3,2,242
 2021,3,2021-08-20,Álftanes,KM,6,0,243
-2021,3,2021-08-21,Hamrarnir,Sindri,2,4,244
+2021,3,2021-08-21,ÍR,Einherji,2,3,244
 2021,3,2021-08-21,Völsungur,Fram,2,1,245
-2021,3,2021-08-21,ÍR,Einherji,2,3,246
+2021,3,2021-08-21,Hamrarnir,Sindri,2,4,246
 2021,3,2021-08-21,Hamar,SR,3,0,247
 2021,3,2021-08-21,Fjölnir,KH,2,1,248
 2021,2,2021-08-22,Augnablik,HK,4,2,249
@@ -409,8 +409,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,3,2022-05-20,Hamar,KH,1,3,408
 2022,3,2022-05-20,Grótta,ÍH,9,1,409
 2022,2,2022-05-21,FHL,FH,1,2,410
-2022,3,2022-05-21,ÍR,Sindri,3,1,411
-2022,3,2022-05-21,Álftanes,Einherji,3,1,412
+2022,3,2022-05-21,Álftanes,Einherji,3,1,411
+2022,3,2022-05-21,ÍR,Sindri,3,1,412
 2022,1,2022-05-23,ÍBV,Þór/KA,5,4,413
 2022,1,2022-05-23,KR,Afturelding,1,0,414
 2022,1,2022-05-23,Keflavík,Þróttur R.,1,2,415
@@ -422,8 +422,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,2,2022-05-25,Tindastóll,Haukar,1,0,421
 2022,3,2022-05-25,Fram,ÍA,3,0,422
 2022,2,2022-05-26,Grindavík,FHL,0,0,423
-2022,3,2022-05-26,ÍH,Hamar,1,1,424
-2022,3,2022-05-26,Einherji,Grótta,1,4,425
+2022,3,2022-05-26,Einherji,Grótta,1,4,424
+2022,3,2022-05-26,ÍH,Hamar,1,1,425
 2022,3,2022-05-26,Sindri,Álftanes,3,2,426
 2022,3,2022-05-26,KH,Völsungur,2,2,427
 2022,4,2022-05-27,Þróttur R.,Víkingur R.,2,1,428
@@ -446,8 +446,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,2,2022-06-04,Haukar,HK,0,3,445
 2022,2,2022-06-04,FHL,Fylkir,2,1,446
 2022,3,2022-06-04,Völsungur,ÍH,1,0,447
-2022,3,2022-06-04,Álftanes,ÍR,3,4,448
-2022,3,2022-06-04,Grótta,Sindri,7,0,449
+2022,3,2022-06-04,Grótta,Sindri,7,0,448
+2022,3,2022-06-04,Álftanes,ÍR,3,4,449
 2022,1,2022-06-06,Stjarnan,Þór/KA,5,0,450
 2022,1,2022-06-07,ÍBV,Keflavík,3,2,451
 2022,1,2022-06-07,KR,Þróttur R.,1,3,452
@@ -477,8 +477,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,2,2022-06-15,Augnablik,Fylkir,0,2,476
 2022,3,2022-06-16,Hamar,ÍR,2,4,477
 2022,1,2022-06-18,Þór/KA,Breiðablik,0,4,478
-2022,3,2022-06-18,Grótta,Álftanes,1,1,479
-2022,3,2022-06-18,Fram,KH,3,2,480
+2022,3,2022-06-18,Fram,KH,3,2,479
+2022,3,2022-06-18,Grótta,Álftanes,1,1,480
 2022,3,2022-06-18,Völsungur,Sindri,6,1,481
 2022,1,2022-06-19,Selfoss,Afturelding,0,1,482
 2022,1,2022-06-19,Þróttur R.,Valur,1,2,483
@@ -504,8 +504,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,3,2022-07-01,KÁ,ÍR,0,8,503
 2022,2,2022-07-02,FHL,HK,1,4,504
 2022,3,2022-07-02,ÍA,Sindri,3,2,505
-2022,3,2022-07-02,Völsungur,Álftanes,4,0,506
-2022,3,2022-07-02,Fram,Einherji,1,0,507
+2022,3,2022-07-02,Fram,Einherji,1,0,506
+2022,3,2022-07-02,Völsungur,Álftanes,4,0,507
 2022,2,2022-07-05,FH,Haukar,6,0,508
 2022,2,2022-07-06,Grindavík,Tindastóll,0,2,509
 2022,2,2022-07-07,HK,Fylkir,0,0,510
@@ -515,8 +515,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,3,2022-07-09,Sindri,Fram,0,1,514
 2022,3,2022-07-09,Grótta,Völsungur,2,3,515
 2022,3,2022-07-15,KÁ,Grótta,0,3,516
-2022,3,2022-07-15,Fram,ÍR,1,0,517
-2022,3,2022-07-15,ÍA,Álftanes,3,0,518
+2022,3,2022-07-15,ÍA,Álftanes,3,0,517
+2022,3,2022-07-15,Fram,ÍR,1,0,518
 2022,3,2022-07-16,KH,Einherji,4,0,519
 2022,3,2022-07-17,Völsungur,Hamar,6,1,520
 2022,2,2022-07-22,Fjölnir,HK,0,1,521
@@ -563,8 +563,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,2,2022-08-11,HK,Haukar,4,1,562
 2022,2,2022-08-12,FH,Augnablik,1,0,563
 2022,3,2022-08-12,Álftanes,KH,3,2,564
-2022,3,2022-08-12,Hamar,Fram,0,2,565
-2022,3,2022-08-12,ÍR,ÍH,6,1,566
+2022,3,2022-08-12,ÍR,ÍH,6,1,565
+2022,3,2022-08-12,Hamar,Fram,0,2,566
 2022,4,2022-08-12,Stjarnan,Valur,1,3,567
 2022,2,2022-08-13,Fylkir,FHL,0,0,568
 2022,2,2022-08-13,Tindastóll,Víkingur R.,5,4,569
@@ -582,9 +582,9 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,2,2022-08-19,Augnablik,Grindavík,0,3,581
 2022,2,2022-08-20,FHL,Tindastóll,2,3,582
 2022,3,2022-08-20,ÍH,Álftanes,5,1,583
-2022,3,2022-08-20,ÍA,KÁ,5,0,584
-2022,3,2022-08-20,KH,Grótta,0,4,585
-2022,3,2022-08-20,Einherji,ÍR,1,3,586
+2022,3,2022-08-20,KH,Grótta,0,4,584
+2022,3,2022-08-20,Einherji,ÍR,1,3,585
+2022,3,2022-08-20,ÍA,KÁ,5,0,586
 2022,3,2022-08-20,Fram,Völsungur,2,2,587
 2022,1,2022-08-23,Þór/KA,Þróttur R.,1,0,588
 2022,1,2022-08-23,Stjarnan,Afturelding,7,1,589
@@ -593,8 +593,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,2,2022-08-25,HK,Víkingur R.,1,2,592
 2022,2,2022-08-25,Fylkir,Augnablik,1,1,593
 2022,2,2022-08-25,Tindastóll,Fjölnir,5,0,594
-2022,3,2022-08-26,Grótta,ÍA,1,1,595
-2022,3,2022-08-26,Fram,KH,3,0,596
+2022,3,2022-08-26,Fram,KH,3,0,595
+2022,3,2022-08-26,Grótta,ÍA,1,1,596
 2022,2,2022-08-27,Haukar,FHL,2,2,597
 2022,3,2022-08-27,Völsungur,ÍR,1,2,598
 2022,4,2022-08-27,Breiðablik,Valur,1,2,599
@@ -625,8 +625,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2022,1,2022-09-18,KR,Selfoss,3,5,624
 2022,1,2022-09-18,Keflavík,Þór/KA,1,3,625
 2022,1,2022-09-18,Breiðablik,Afturelding,3,0,626
-2022,3,2022-09-18,KH,Grótta,1,5,627
-2022,3,2022-09-18,ÍR,Fram,0,2,628
+2022,3,2022-09-18,ÍR,Fram,0,2,627
+2022,3,2022-09-18,KH,Grótta,1,5,628
 2022,3,2022-09-18,Völsungur,ÍA,0,2,629
 2022,1,2022-09-19,Stjarnan,Þróttur R.,2,0,630
 2022,3,2022-09-23,Grótta,ÍR,0,1,631
@@ -728,8 +728,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,2,2023-05-02,Fylkir,Afturelding,2,2,727
 2023,2,2023-05-02,Víkingur R.,Grótta,2,1,728
 2023,2,2023-05-02,Fram,Grindavík,2,2,729
-2023,3,2023-05-02,Álftanes,Smári,8,0,730
-2023,3,2023-05-02,Haukar,KH,3,2,731
+2023,3,2023-05-02,Haukar,KH,3,2,730
+2023,3,2023-05-02,Álftanes,Smári,8,0,731
 2023,2,2023-05-03,HK,Augnablik,2,2,732
 2023,1,2023-05-04,Selfoss,Þróttur R.,1,2,733
 2023,3,2023-05-04,Fjölnir,ÍA,4,5,734
@@ -747,12 +747,12 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,2,2023-05-12,KR,Fylkir,0,6,746
 2023,2,2023-05-12,HK,Fram,2,0,747
 2023,2,2023-05-12,Víkingur R.,Augnablik,6,0,748
-2023,3,2023-05-12,ÍH,ÍR,1,4,749
-2023,3,2023-05-12,ÍA,Haukar,1,1,750
+2023,3,2023-05-12,ÍA,Haukar,1,1,749
+2023,3,2023-05-12,ÍH,ÍR,1,4,750
 2023,2,2023-05-13,Grótta,Afturelding,5,2,751
 2023,2,2023-05-13,Grindavík,FHL,1,0,752
-2023,3,2023-05-13,Álftanes,Sindri,6,0,753
-2023,3,2023-05-13,KH,Einherji,1,4,754
+2023,3,2023-05-13,KH,Einherji,1,4,753
+2023,3,2023-05-13,Álftanes,Sindri,6,0,754
 2023,3,2023-05-14,Fjölnir,Völsungur,4,1,755
 2023,1,2023-05-15,Þór/KA,Breiðablik,2,0,756
 2023,1,2023-05-15,ÍBV,Þróttur R.,3,0,757
@@ -764,8 +764,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,2,2023-05-17,Grótta,Augnablik,2,1,763
 2023,2,2023-05-17,Fram,Víkingur R.,0,3,764
 2023,3,2023-05-17,Fjölnir,ÍH,2,3,765
-2023,3,2023-05-17,ÍR,KH,4,1,766
-2023,3,2023-05-17,Haukar,Álftanes,0,0,767
+2023,3,2023-05-17,Haukar,Álftanes,0,0,766
+2023,3,2023-05-17,ÍR,KH,4,1,767
 2023,3,2023-05-17,ÍA,Einherji,1,0,768
 2023,2,2023-05-18,FHL,HK,1,2,769
 2023,3,2023-05-18,Sindri,Smári,1,1,770
@@ -820,8 +820,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,2,2023-06-08,HK,KR,6,1,819
 2023,2,2023-06-08,Augnablik,Fylkir,0,5,820
 2023,2,2023-06-08,Víkingur R.,Afturelding,2,3,821
-2023,3,2023-06-09,ÍH,KH,5,1,822
-2023,3,2023-06-09,ÍR,Haukar,2,2,823
+2023,3,2023-06-09,ÍR,Haukar,2,2,822
+2023,3,2023-06-09,ÍH,KH,5,1,823
 2023,2,2023-06-10,Fram,FHL,3,2,824
 2023,3,2023-06-10,Fjölnir,Sindri,7,2,825
 2023,3,2023-06-10,Völsungur,ÍA,2,0,826
@@ -904,13 +904,13 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,2,2023-07-13,Fylkir,KR,2,1,903
 2023,3,2023-07-14,ÍR,ÍH,1,4,904
 2023,3,2023-07-15,Einherji,KH,7,2,905
-2023,3,2023-07-16,Völsungur,Fjölnir,1,3,906
-2023,3,2023-07-16,Sindri,Álftanes,0,5,907
+2023,3,2023-07-16,Sindri,Álftanes,0,5,906
+2023,3,2023-07-16,Völsungur,Fjölnir,1,3,907
 2023,3,2023-07-19,Álftanes,Haukar,3,0,908
 2023,2,2023-07-20,Fram,HK,2,1,909
 2023,2,2023-07-20,Afturelding,Grótta,3,1,910
-2023,3,2023-07-20,KH,ÍR,0,2,911
-2023,3,2023-07-20,ÍH,Fjölnir,3,3,912
+2023,3,2023-07-20,ÍH,Fjölnir,3,3,911
+2023,3,2023-07-20,KH,ÍR,0,2,912
 2023,2,2023-07-22,FHL,Grindavík,4,2,913
 2023,3,2023-07-22,Smári,Sindri,2,5,914
 2023,3,2023-07-22,Einherji,ÍA,1,0,915
@@ -941,8 +941,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,3,2023-08-02,Álftanes,ÍR,0,4,940
 2023,1,2023-08-03,Breiðablik,Selfoss,4,0,941
 2023,1,2023-08-03,Valur,Þróttur R.,2,1,942
-2023,3,2023-08-03,ÍH,Völsungur,0,3,943
-2023,3,2023-08-03,Smári,Haukar,0,13,944
+2023,3,2023-08-03,Smári,Haukar,0,13,943
+2023,3,2023-08-03,ÍH,Völsungur,0,3,944
 2023,3,2023-08-03,ÍA,Fjölnir,4,3,945
 2023,1,2023-08-07,Breiðablik,Þór/KA,4,2,946
 2023,2,2023-08-07,Augnablik,Víkingur R.,0,4,947
@@ -1018,8 +1018,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,2,2023-09-09,FHL,Afturelding,3,3,1017
 2023,2,2023-09-09,Augnablik,Grindavík,0,7,1018
 2023,2,2023-09-09,Fram,KR,3,2,1019
-2023,3,2023-09-09,ÍH,Sindri,7,0,1020
-2023,3,2023-09-09,Haukar,Völsungur,3,1,1021
+2023,3,2023-09-09,Haukar,Völsungur,3,1,1020
+2023,3,2023-09-09,ÍH,Sindri,7,0,1021
 2023,3,2023-09-09,Fjölnir,ÍR,1,3,1022
 2023,1,2023-09-10,Selfoss,Tindastóll,1,2,1023
 2023,1,2023-09-10,ÍBV,Keflavík,1,2,1024
@@ -1028,8 +1028,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2023,1,2023-09-14,Stjarnan,Valur,1,0,1027
 2023,3,2023-09-15,Völsungur,Einherji,0,1,1028
 2023,3,2023-09-15,Haukar,ÍH,5,0,1029
-2023,3,2023-09-15,Smári,Fjölnir,0,5,1030
-2023,3,2023-09-15,Álftanes,ÍA,0,4,1031
+2023,3,2023-09-15,Álftanes,ÍA,0,4,1030
+2023,3,2023-09-15,Smári,Fjölnir,0,5,1031
 2023,1,2023-09-16,Keflavík,Selfoss,1,0,1032
 2023,1,2023-09-16,Tindastóll,ÍBV,7,2,1033
 2023,3,2023-09-16,Sindri,KH,2,1,1034
@@ -1443,8 +1443,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2024,3,2024-09-14,Fjölnir,KH,5,1,1442
 2024,3,2024-09-14,Vestri,Smári,6,2,1443
 2024,3,2024-09-14,Dalvík/Reynir,Álftanes,1,3,1444
-2024,3,2024-09-15,Völsungur,KR,3,2,1445
-2024,3,2024-09-15,Haukar,ÍH,6,1,1446
+2024,3,2024-09-15,Haukar,ÍH,6,1,1445
+2024,3,2024-09-15,Völsungur,KR,3,2,1446
 2024,1,2024-09-20,Víkingur R.,Þróttur R.,1,1,1447
 2024,3,2024-09-21,Völsungur,ÍH,3,3,1448
 2024,1,2024-09-22,Valur,FH,2,0,1449
@@ -1452,8 +1452,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2024,3,2024-09-22,Einherji,Haukar,0,4,1451
 2024,1,2024-09-28,Breiðablik,FH,4,2,1452
 2024,1,2024-09-28,Víkingur R.,Valur,1,2,1453
-2024,3,2024-09-28,KR,Einherji,2,1,1454
-2024,3,2024-09-28,Haukar,Völsungur,3,0,1455
+2024,3,2024-09-28,Haukar,Völsungur,3,0,1454
+2024,3,2024-09-28,KR,Einherji,2,1,1455
 2024,1,2024-09-29,Þróttur R.,Þór/KA,0,0,1456
 2024,1,2024-10-05,Þór/KA,Víkingur R.,0,1,1457
 2024,1,2024-10-05,FH,Þróttur R.,0,3,1458
@@ -1521,15 +1521,15 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2025,5,2025-04-11,HK,Grótta,3,2,1520
 2025,1,2025-04-15,Þróttur R.,Fram,3,1,1521
 2025,1,2025-04-15,Breiðablik,Stjarnan,6,1,1522
-2025,1,2025-04-16,Víkingur R.,Þór/KA,1,4,1523
-2025,1,2025-04-16,Tindastóll,FHL,1,0,1524
-2025,1,2025-04-16,Valur,FH,0,0,1525
+2025,1,2025-04-16,Tindastóll,FHL,1,0,1523
+2025,1,2025-04-16,Valur,FH,0,0,1524
+2025,1,2025-04-16,Víkingur R.,Þór/KA,1,4,1525
 2025,4,2025-04-16,ÍR,Vestri,3,0,1526
 2025,4,2025-04-17,ÍH,Grótta,1,9,1527
 2025,4,2025-04-19,Haukar,Selfoss,4,0,1528
-2025,4,2025-04-19,Einherji,Sindri,4,2,1529
+2025,4,2025-04-19,HK,Afturelding,2,0,1529
 2025,4,2025-04-19,Dalvík/Reynir,Völsungur,0,1,1530
-2025,4,2025-04-19,HK,Afturelding,2,0,1531
+2025,4,2025-04-19,Einherji,Sindri,4,2,1531
 2025,1,2025-04-21,Þór/KA,Tindastóll,2,1,1532
 2025,1,2025-04-21,FHL,Valur,0,2,1533
 2025,1,2025-04-22,Stjarnan,Víkingur R.,2,6,1534
@@ -1541,8 +1541,8 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2025,1,2025-04-27,Valur,Þór/KA,3,0,1540
 2025,1,2025-04-27,Tindastóll,Stjarnan,1,2,1541
 2025,4,2025-04-27,ÍR,KR,1,7,1542
-2025,4,2025-04-27,ÍBV,Grótta,4,0,1543
-2025,4,2025-04-27,Haukar,HK,0,7,1544
+2025,4,2025-04-27,Haukar,HK,0,7,1543
+2025,4,2025-04-27,ÍBV,Grótta,4,0,1544
 2025,4,2025-04-28,Fjölnir,Fylkir,0,5,1545
 2025,1,2025-04-29,Breiðablik,Fram,7,1,1546
 2025,1,2025-04-29,Víkingur R.,Þróttur R.,0,1,1547
@@ -1552,9 +1552,9 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2025,1,2025-05-03,Þróttur R.,Tindastóll,1,0,1551
 2025,1,2025-05-03,Stjarnan,Valur,1,0,1552
 2025,2,2025-05-03,Grótta,HK,1,2,1553
-2025,2,2025-05-03,Haukar,Keflavík,2,1,1554
-2025,2,2025-05-03,Afturelding,KR,1,3,1555
-2025,2,2025-05-03,Fylkir,ÍA,3,1,1556
+2025,2,2025-05-03,Afturelding,KR,1,3,1554
+2025,2,2025-05-03,Fylkir,ÍA,3,1,1555
+2025,2,2025-05-03,Haukar,Keflavík,2,1,1556
 2025,2,2025-05-03,Grindavík/ Njarðvík,ÍBV,2,1,1557
 2025,3,2025-05-04,Smári,Sindri,1,6,1558
 2025,3,2025-05-04,Fjölnir,Selfoss,1,5,1559
@@ -1562,10 +1562,10 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2025,1,2025-05-08,Tindastóll,Breiðablik,1,5,1561
 2025,1,2025-05-08,Valur,Þróttur R.,1,3,1562
 2025,1,2025-05-08,FHL,Þór/KA,2,5,1563
-2025,2,2025-05-08,ÍA,Afturelding,2,0,1564
-2025,2,2025-05-08,Fylkir,Grindavík/ Njarðvík,3,2,1565
+2025,2,2025-05-08,HK,Haukar,1,0,1564
+2025,2,2025-05-08,ÍA,Afturelding,2,0,1565
 2025,2,2025-05-08,Keflavík,KR,2,2,1566
-2025,2,2025-05-08,HK,Haukar,1,0,1567
+2025,2,2025-05-08,Fylkir,Grindavík/ Njarðvík,3,2,1567
 2025,3,2025-05-08,Dalvík/Reynir,Völsungur,1,4,1568
 2025,1,2025-05-09,Víkingur R.,Fram,1,2,1569
 2025,1,2025-05-09,FH,Stjarnan,2,1,1570
@@ -1585,23 +1585,47 @@ season,division,date,home,away,home_goals,away_goals,game_nr
 2025,2,2025-05-16,Afturelding,Keflavík,1,2,1584
 2025,1,2025-05-17,Þróttur R.,FH,4,1,1585
 2025,1,2025-05-17,Stjarnan,FHL,1,0,1586
-2025,1,2025-05-17,Víkingur R.,Tindastóll,1,4,1587
-2025,1,2025-05-17,Fram,Þór/KA,1,3,1588
+2025,1,2025-05-17,Fram,Þór/KA,1,3,1587
+2025,1,2025-05-17,Víkingur R.,Tindastóll,1,4,1588
 2025,2,2025-05-17,Grótta,Fylkir,3,0,1589
-2025,2,2025-05-17,KR,HK,5,4,1590
-2025,2,2025-05-17,Grindavík/ Njarðvík,ÍA,1,1,1591
-2025,2,2025-05-22,ÍBV,KR,4,0,1592
-2025,2,2025-05-22,ÍA,Keflavík,1,1,1593
-2025,2,2025-05-22,Fylkir,Haukar,1,2,1594
-2025,2,2025-05-22,Grindavík/ Njarðvík,Grótta,3,2,1595
-2025,2,2025-05-22,HK,Afturelding,3,0,1596
-2025,1,2025-05-23,Fram,Tindastóll,1,0,1597
-2025,1,2025-05-23,FH,Breiðablik,2,1,1598
-2025,1,2025-05-23,Valur,Víkingur R.,1,1,1599
-2025,1,2025-05-24,Þór/KA,Stjarnan,1,0,1600
-2025,1,2025-05-25,FHL,Þróttur R.,0,4,1601
-2025,2,2025-05-26,Afturelding,ÍBV,0,8,1602
-2025,2,2025-05-28,KR,Fylkir,3,1,1603
-2025,2,2025-05-28,Haukar,Grindavík/ Njarðvík,1,2,1604
-2025,2,2025-05-28,Keflavík,HK,0,1,1605
-2025,2,2025-05-28,Grótta,ÍA,2,1,1606
+2025,2,2025-05-17,Grindavík/ Njarðvík,ÍA,1,1,1590
+2025,2,2025-05-17,KR,HK,5,4,1591
+2025,3,2025-05-17,Einherji,Smári,5,0,1592
+2025,3,2025-05-17,Vestri,Dalvík/Reynir,2,3,1593
+2025,3,2025-05-18,Völsungur,ÍR,2,1,1594
+2025,3,2025-05-18,Sindri,Álftanes,1,4,1595
+2025,2,2025-05-22,ÍBV,KR,4,0,1596
+2025,2,2025-05-22,Grindavík/ Njarðvík,Grótta,3,2,1597
+2025,2,2025-05-22,HK,Afturelding,3,0,1598
+2025,2,2025-05-22,ÍA,Keflavík,1,1,1599
+2025,2,2025-05-22,Fylkir,Haukar,1,2,1600
+2025,3,2025-05-22,KÞ,Smári,1,0,1601
+2025,1,2025-05-23,Fram,Tindastóll,1,0,1602
+2025,1,2025-05-23,FH,Breiðablik,2,1,1603
+2025,1,2025-05-23,Valur,Víkingur R.,1,1,1604
+2025,3,2025-05-23,Fjölnir,Álftanes,3,1,1605
+2025,1,2025-05-24,Þór/KA,Stjarnan,1,0,1606
+2025,3,2025-05-24,Selfoss,Dalvík/Reynir,4,1,1607
+2025,1,2025-05-25,FHL,Þróttur R.,0,4,1608
+2025,3,2025-05-25,ÍH,Vestri,9,2,1609
+2025,3,2025-05-25,Völsungur,Sindri,6,0,1610
+2025,2,2025-05-26,Afturelding,ÍBV,0,8,1611
+2025,2,2025-05-28,KR,Fylkir,3,1,1612
+2025,2,2025-05-28,Keflavík,HK,0,1,1613
+2025,2,2025-05-28,Haukar,Grindavík/ Njarðvík,1,2,1614
+2025,2,2025-05-28,Grótta,ÍA,2,1,1615
+2025,3,2025-05-29,Álftanes,Selfoss,1,2,1616
+2025,3,2025-05-31,Dalvík/Reynir,ÍH,3,4,1617
+2025,3,2025-05-31,ÍR,Fjölnir,3,3,1618
+2025,2,2025-06-05,Fylkir,Afturelding,0,1,1619
+2025,2,2025-06-05,ÍA,HK,1,5,1620
+2025,2,2025-06-05,Grindavík/ Njarðvík,KR,3,1,1621
+2025,2,2025-06-05,Grótta,Haukar,5,1,1622
+2025,3,2025-06-05,Einherji,Selfoss,0,4,1623
+2025,3,2025-06-05,Smári,ÍH,0,8,1624
+2025,1,2025-06-06,Tindastóll,Valur,2,2,1625
+2025,2,2025-06-06,ÍBV,Keflavík,1,1,1626
+2025,1,2025-06-07,Víkingur R.,FH,1,4,1627
+2025,1,2025-06-07,Breiðablik,FHL,6,0,1628
+2025,1,2025-06-07,Fram,Stjarnan,3,1,1629
+2025,1,2025-06-07,Þróttur R.,Þór/KA,2,0,1630

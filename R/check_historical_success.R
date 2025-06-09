@@ -55,8 +55,8 @@ bets |>
       arrange(dags_leikur) |> 
       mutate(
         cumul_ev = cumsum(ev * amount),
-        change = na_if(change, 0),
         cumul_change = cumsum(change),
+        change = na_if(change, 0),
         type = if_else(
           is.na(change),
           "Prediction",
@@ -211,4 +211,103 @@ bets |>
     title = "Comparing observed profit to 95% prediction intervals of expected profit for each day"
   )
 
+#### ROI ####
 
+bets |> 
+  drop_na(prob, ev) |> 
+  arrange(dags_leikur) |> 
+  mutate(
+    cumul_bet = cumsum(amount),
+    cumul_change = cumsum(change),
+    change = na_if(change, 0),
+    type = if_else(
+      is.na(change),
+      "Prediction",
+      "Observed"
+    )
+  ) |> 
+  summarise(
+    cumul_bet = tail(na.omit(cumul_bet), 1),
+    cumul_change = tail(na.omit(cumul_change), 1),
+    roi = cumul_change / cumul_bet,
+    .by = c(dags_leikur)
+  ) 
+
+#### P and EV ####
+
+
+
+bets |> 
+  drop_na(prob, win) |> 
+  select(prob, win) |> 
+  mutate(
+    group = ntile(prob, 10)
+  ) |> 
+  summarise(
+    prob = mean(prob),
+    win = mean(win),
+    .by = group
+  ) |> 
+  ggplot(aes(prob, win)) +
+  geom_abline(
+    intercept = 0, 
+    slope = 1,
+    lty = 2
+  ) +
+  geom_point() +
+  scale_x_continuous(
+    limits = c(0, 1),
+    guide = ggh4x::guide_axis_truncated(),
+    labels = label_percent(),
+    breaks = breaks_width(0.2)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 1),
+    guide = ggh4x::guide_axis_truncated(),
+    labels = label_percent(),
+    breaks = breaks_width(0.2)
+  ) +
+  labs(
+    title = "Kvörðun fótboltalíkansins",
+    x = "P(X = x)",
+    y = "Observed outcome"
+  )
+
+
+bets |> 
+  drop_na(prob, win) |> 
+  select(ev, change, win, amount) |> 
+  mutate(
+    group = ntile(ev, 5),
+    obs = change / amount
+  )  |> 
+  summarise(
+    ev = mean(ev),
+    obs = mean(obs),
+    .by = group
+  ) |> 
+  ggplot(aes(ev, obs)) +
+  geom_hline(
+    yintercept = 0,
+    alpha = 0.2
+  ) +
+  geom_vline(
+    xintercept = 0,
+    alpha = 0.2
+  ) +
+  geom_abline(
+    intercept = 0, 
+    slope = 1,
+    lty = 2
+  ) +
+  geom_point() +
+  scale_x_continuous(
+    limits = c(-1, 1),
+    guide = ggh4x::guide_axis_truncated(),
+    labels = label_percent()
+  ) +
+  scale_y_continuous(
+    limits = c(-1, 1),
+    guide = ggh4x::guide_axis_truncated(),
+    labels = label_percent()
+  )
