@@ -6,7 +6,6 @@ library(posterior)
 library(metill)
 library(geomtextpath)
 library(ggtext)
-library(ggh4x)
 library(glue)
 library(here)
 theme_set(theme_metill())
@@ -57,16 +56,17 @@ plot_dat <- offense |>
   )
 
 plot_dat |>
-  filter(
-    team %in%
-      c(
-        "KR",
-        # "Víkingur R.",
-        "Vestri"
-      )
-  ) |>
+  # filter(
+  #   team %in%
+  #     c(
+  #       "KR",
+  #       # "Víkingur R.",
+  #       "Vestri"
+  #     )
+  # ) |>
   inner_join(
     d |>
+      filter(division == 1) |>
       pivot_longer(c(home, away)) |>
       select(
         season,
@@ -89,15 +89,23 @@ plot_dat |>
         date
       )
   ) |>
+  filter(
+    season == 2025
+  ) |>
   ggplot(aes(date, median)) +
   geom_hline(
     yintercept = 0,
     lty = 2,
     alpha = 0.3
   ) +
-  geom_ribbon(
-    aes(ymin = q5, ymax = q95, fill = team, group = paste(team, season)),
-    alpha = 0.1
+  geom_line(
+    data = ~ rename(.x, tm = team),
+    aes(
+      group = paste(tm, season)
+    ),
+    col = "grey50",
+    alpha = 0.2,
+    linewidth = 1
   ) +
   geom_line(
     aes(
@@ -107,20 +115,36 @@ plot_dat |>
     linewidth = 1
   ) +
   scale_x_date(
-    guide = guide_axis_truncated(),
-    breaks = breaks_width("4 month"),
+    guide = guide_axis(cap = "both"),
+    breaks = breaks_width("1 month"),
     labels = label_date_short()
   ) +
   scale_y_continuous(
-    guide = guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
-  scale_colour_brewer(
-    palette = "Set1"
+  scale_colour_manual(
+    values = c(
+      "Víkingur R." = "#b30000",
+      "Breiðablik" = "#006d2c",
+      "Valur" = "#ce1256",
+      "KR" = "black",
+      "Stjarnan" = "#08519c",
+      "ÍA" = "#fec44f",
+      "KA" = "#9ecae1",
+      "ÍBV" = "black",
+      "Fram" = "#4292c6",
+      "FH" = "#d9d9d9",
+      "Vestri" = "#08306b",
+      "Afturelding" = "#e31a1c"
+    )
   ) +
-  scale_fill_brewer(
-    palette = "Set1"
+  facet_grid(
+    rows = vars(variable),
+    cols = vars(team)
   ) +
-  facet_wrap("variable", ncol = 1) +
+  theme(
+    legend.position = "none"
+  ) +
   labs(
     title = "Þróun styrks nokkurra félagsliða í Bestu Deild karla",
     x = NULL,
@@ -130,9 +154,8 @@ plot_dat |>
   )
 
 ggsave(
-  filename = "temp_male.png",
+  filename = "results/male/figures/evolution_male.png",
   width = 8,
   height = 0.5 * 8,
   scale = 1.4
 )
-

@@ -6,7 +6,6 @@ library(posterior)
 library(metill)
 library(geomtextpath)
 library(ggtext)
-library(ggh4x)
 library(glue)
 library(here)
 theme_set(theme_metill())
@@ -176,20 +175,14 @@ plot <- predictions |>
     colour = "grey40"
   ) +
   scale_x_continuous(
-    guide = guide_axis_truncated(
-      trunc_lower = -8,
-      trunc_upper = 8
-    ),
+    guide = guide_axis(cap = "both"),
     breaks = seq(-8, 8),
     labels = function(x) abs(x),
     expand = expansion(add = 1),
     limits = c(-8, 8),
   ) +
   scale_y_continuous(
-    guide = guide_axis_truncated(
-      trunc_lower = 1,
-      trunc_upper = max(predictions$game_nr)
-    ),
+    guide = guide_axis(cap = "both"),
     breaks = seq(max(predictions$game_nr), 1),
     labels = predictions |>
       distinct(game_nr, home, away, match) |>
@@ -203,10 +196,7 @@ plot <- predictions |>
         distinct(game_nr, home, away, match) |>
         arrange(desc(game_nr)) |>
         pull(away),
-      guide = guide_axis_truncated(
-        trunc_lower = 1,
-        trunc_upper = max(predictions$game_nr)
-      )
+      guide = guide_axis(cap = "both")
     )
   ) +
   scale_colour_manual(
@@ -428,16 +418,10 @@ plot_dat |>
     limits = c(0, NA),
     expand = expansion(add = c(0, 7)),
     breaks = breaks_width(10),
-    guide = guide_axis_truncated(
-      trunc_lower = 0,
-      trunc_upper = 60
-    )
+    guide = guide_axis(cap = "both")
   ) +
   scale_y_continuous(
-    guide = guide_axis_truncated(
-      trunc_lower = 1,
-      trunc_upper = 12
-    ),
+    guide = guide_axis(cap = "both"),
     breaks = seq(1, 12),
     labels = plot_dat |>
       distinct(team, team_nr) |>
@@ -527,11 +511,11 @@ plot_dat |>
     linewidth = 0.1
   ) +
   scale_x_continuous(
-    guide = guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = 1:12
   ) +
   scale_y_continuous(
-    guide = guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = breaks_width(0.25),
     labels = label_hlutf()
   ) +
@@ -721,7 +705,7 @@ plot_dat |>
     expand = expansion(mult = c(0.01, 0.05))
   ) +
   scale_y_discrete(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   scale_colour_brewer(
     palette = "Set1",
@@ -787,10 +771,7 @@ results$draws("home_advantage_tot") |>
     by = join_by(team_nr)
   ) |>
   semi_join(
-    d |>
-      filter(season == 2025, division == 1) |>
-      select(home, away) |>
-      pivot_longer(c(everything()), values_to = "team") |>
+    top_teams |>
       distinct(team)
   ) |>
   reframe(
@@ -856,13 +837,13 @@ results$draws("home_advantage_tot") |>
     guide = guide_none()
   ) +
   scale_x_continuous(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = c(1, 1.25, 1.5, 1.75, 2, 2.5),
     labels = \(x) paste0("+", label_hlutf(accuracy = 1)(x - 1)),
     # trans = "log"
   ) +
   scale_y_discrete(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   facet_wrap("type") +
   coord_cartesian(

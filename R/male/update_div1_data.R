@@ -37,18 +37,19 @@ d <- data |>
     result = X2
   ) |>
   mutate(
-    dags = str_match(dags, "^(.*)\\r.*")[, 2] |>
-      str_replace_all("[A-Za-]", "") |>
+    dags = str_match(dags, "^(.*)\\.*")[, 2] |>
+      str_replace_all("[A-Za-z]", "") |>
       dmy(),
     result = str_squish(result),
     result = map(
       result,
-      \(x)
+      \(x) {
         str_match(x, "^(.*) ([0-9]+) (.*) ([0-9]+)$")[, -1] |>
           t() |>
           as.data.frame() |>
           as_tibble() |>
           rename(heima = 1, stig_heima = 2, gestir = 3, stig_gestir = 4)
+      }
     )
   ) |>
   unnest_wider(result) |>

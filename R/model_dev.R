@@ -6,7 +6,6 @@ library(posterior)
 library(metill)
 library(geomtextpath)
 library(ggtext)
-library(ggh4x)
 library(glue)
 library(here)
 theme_set(theme_metill())
@@ -37,40 +36,40 @@ results <- model$sample(
 results$summary(
   c(
     "mean_log_goals",
-    "alpha_mu3", 
-    "beta_mu3_strength_diff", 
-    "logit_p0", 
-    "beta_logit_p_strength_diff", 
+    "alpha_mu3",
+    "beta_mu3_strength_diff",
+    "logit_p0",
+    "beta_logit_p_strength_diff",
     "tie_alpha",
     "tie_beta"
   )
 )
 
-results$draws(c("mean_log_goals")) |> 
+results$draws(c("mean_log_goals")) |>
   bayesplot::mcmc_hist_by_chain()
 
 results$summary(
   c("percent_home")
-) |> 
+) |>
   mutate(
-    team = row_number() |> 
-      as.factor() |> 
+    team = row_number() |>
+      as.factor() |>
       fct_reorder(mean)
-  ) |> 
-  ggplot(aes(mean, team)) + 
+  ) |>
+  ggplot(aes(mean, team)) +
   geom_pointrange(
     aes(xmin = q5, xmax = q95)
   )
 
 results$summary(
   c("total_home_advantage")
-) |> 
+) |>
   mutate(
-    team = row_number() |> 
-      as.factor() |> 
+    team = row_number() |>
+      as.factor() |>
       fct_reorder(mean)
-  ) |> 
-  ggplot(aes(mean, team)) + 
+  ) |>
+  ggplot(aes(mean, team)) +
   geom_pointrange(
     aes(xmin = q5, xmax = q95)
   )
@@ -179,13 +178,13 @@ results$draws("home_advantage_tot") |>
     guide = guide_none()
   ) +
   scale_x_continuous(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = c(1, 1.25, 1.5, 1.75, 2, 2.5),
     labels = \(x) paste0("+", label_hlutf(accuracy = 1)(x - 1)),
     # trans = "log"
   ) +
   scale_y_discrete(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   facet_wrap("type") +
   coord_cartesian(

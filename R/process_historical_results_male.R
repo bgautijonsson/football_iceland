@@ -83,14 +83,14 @@ p <- d |>
     position = position_nudge(x = 0.5)
   ) +
   scale_x_date(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     labels = label_date_short(
       format = c("", "%B", "%d", "")
     ),
     breaks = breaks_pretty(8)
   ) +
   scale_y_reverse(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = 1:12
   ) +
   scale_fill_gradient(
@@ -157,14 +157,14 @@ p <- d |>
     col = "black"
   ) +
   scale_x_date(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     labels = label_date_short(
       format = c("", "%B", "%d", "")
     ),
     breaks = breaks_pretty(8)
   ) +
   scale_y_reverse(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = 1:12
   ) +
   facet_wrap(
@@ -265,14 +265,14 @@ p <- d |>
     position = position_nudge(x = 0.5)
   ) +
   scale_x_date(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     labels = label_date_short(
       format = c("", "%B", "%d", "")
     ),
     breaks = breaks_pretty(8)
   ) +
   scale_y_continuous(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   scale_fill_gradient(
     low = "#fdfcfc",
@@ -337,14 +337,14 @@ p <- d |>
     col = "black"
   ) +
   scale_x_date(
-    guide = ggh4x::guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     labels = label_date_short(
       format = c("", "%B", "%d", "")
     ),
     breaks = breaks_pretty(8)
   ) +
   scale_y_continuous(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   facet_wrap(
     "team",

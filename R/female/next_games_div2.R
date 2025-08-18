@@ -21,7 +21,7 @@ d <- page |>
 
 get_teams <- function(string) {
   splits <- string |>
-    str_split("\\r\\n") |>
+    str_split("\\r|\\n") |>
     unlist()
   out <- splits[str_detect(splits, "[A-Za-zÞ]")] |> str_squish()
   names(out) <- c("home", "away")

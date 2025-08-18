@@ -21,7 +21,7 @@ d <- page |>
 
 get_teams <- function(string) {
   splits <- string |>
-    str_split("\\r\\n") |>
+    str_split("\\r|\\n") |>
     unlist()
   out <- splits[str_detect(splits, "[A-Za-zÞ]")] |> str_squish()
   names(out) <- c("home", "away")
@@ -30,9 +30,9 @@ get_teams <- function(string) {
 
 
 d |>
-  filter(
-    !str_detect(str_to_lower(X2), "úrslit")
-  ) |>
+  #filter(
+  #  !str_detect(str_to_lower(X2), "úrslit")
+  #) |>
   mutate(
     dags = str_sub(X1, 6, 16) |> dmy(),
     teams = map(X2, get_teams),

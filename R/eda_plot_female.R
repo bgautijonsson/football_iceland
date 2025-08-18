@@ -6,7 +6,6 @@ library(posterior)
 library(metill)
 library(geomtextpath)
 library(ggtext)
-library(ggh4x)
 library(glue)
 library(here)
 theme_set(theme_metill())
@@ -108,12 +107,12 @@ plot_dat |>
     linewidth = 1
   ) +
   scale_x_date(
-    guide = guide_axis_truncated(),
+    guide = guide_axis(cap = "both"),
     breaks = breaks_width("4 month"),
     labels = label_date_short()
   ) +
   scale_y_continuous(
-    guide = guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   scale_colour_brewer(
     palette = "Set1"
@@ -134,47 +133,46 @@ plot_dat |>
 results$summary("sigma_off")
 
 
-
-
-model_d |> 
+model_d |>
   select(
-    date, 
+    date,
     game_nr,
-    team_home = home, 
-    team_away = away, 
-    round_home = home_round, 
+    team_home = home,
+    team_away = away,
+    round_home = home_round,
     round_away = away_round
-  ) |> 
+  ) |>
   pivot_longer(
     cols = !c(date, game_nr),
     names_to = c(".value", "type"),
     names_sep = "_"
-  ) |> 
+  ) |>
   mutate(
     opponent = team[((row_number()) %% 2) + 1],
     .by = game_nr
-  ) |> 
+  ) |>
   inner_join(
-    plot_dat |> 
-      select(round, team, median, variable) |> 
-      pivot_wider(names_from = variable, values_from = median) |> 
+    plot_dat |>
+      select(round, team, median, variable) |>
+      pivot_wider(names_from = variable, values_from = median) |>
       rename(
         offense = Sóknarstyrkur,
         defense = Varnarstyrkur
-      ) |> 
+      ) |>
       mutate(
         strength = offense + defense
       ),
     by = join_by(round, opponent == team)
-  ) |> 
+  ) |>
   inner_join(
-    model_d |> 
+    model_d |>
       select(game_nr, division, season)
-  ) |> 
+  ) |>
   filter(
-    season == 2025, division == 1
-  ) |> 
-  arrange(date) |> 
+    season == 2025,
+    division == 1
+  ) |>
+  arrange(date) |>
   # filter(
   #   team %in% c(
   #     "Víkingur R.",
@@ -183,28 +181,27 @@ model_d |>
   #     "Valur",
   #     "KR"
   #   )
-  # ) |> 
+  # ) |>
   summarise(
     mean = mean(strength),
     .by = team
-  ) |> 
+  ) |>
   mutate(
     team = fct_reorder(team, mean)
-  ) |> 
+  ) |>
   ggplot(aes(mean, team)) +
   geom_segment(
     aes(xend = 0, yend = team)
   ) +
   geom_point() +
   scale_x_continuous(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   scale_y_discrete(
-    guide = ggh4x::guide_axis_truncated()
+    guide = guide_axis(cap = "both")
   ) +
   labs(
     x = NULL,
     y = NULL,
     title = "Meðalstyrkur mótherja hingað til á tímabilinu"
   )
-

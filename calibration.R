@@ -63,8 +63,8 @@ d |>
     outcome = 1 * (result == pred)
   ) |> 
   mutate(
-    group = ntile(p, 20),
-    group = floor(p * 20) / 20
+    group = ntile(p, 10),
+    group = floor(p * 10) / 10
   ) |> 
   summarise(
     pred = mean(p),
@@ -102,114 +102,114 @@ ggsave(
   scale = 1.3
 )
 
-results |> 
-  select(date, home, away, home_goals, away_goals) |> 
-  inner_join(
-    d |> 
-      select(
-        date, home, away, fit_date, p,
-        home_pred = home_goals,
-        away_pred = away_goals
-      )
-  ) |> 
-  filter(
-    fit_date < date
-  ) |> 
-  filter(
-    fit_date == max(fit_date),
-    .by = c(date, home, away)
-  ) |> 
-  mutate(
-    correct = 1 * (home_goals == home_pred) * (away_goals == away_pred),
-    group = ntile(p, 10)
-  ) |> 
-  summarise(
-    p = mean(p),
-    obs = mean(correct),
-    .by = group
-  ) |> 
-  ggplot(aes(p, obs)) +
-  geom_abline(
-    intercept = 0, 
-    slope = 1,
-    lty = 2
-  ) +
-  geom_point() +
-  scale_x_continuous(
-    labels = label_percent(),
-    guide = guide_axis(cap = "both")
-  ) +
-  scale_y_continuous(
-    labels = label_percent(),
-    guide = guide_axis(cap = "both")
-  ) +
-  labs(
-    title = "Kvörðun á spá fótboltalíkans um markafjölda hvors liðs",
-    x = "P(X = x, Y = y)",
-    y = "P(spá er rétt)"
-  )
+# results |> 
+#   select(date, home, away, home_goals, away_goals) |> 
+#   inner_join(
+#     d |> 
+#       select(
+#         date, home, away, fit_date, p,
+#         home_pred = home_goals,
+#         away_pred = away_goals
+#       )
+#   ) |> 
+#   filter(
+#     fit_date < date
+#   ) |> 
+#   filter(
+#     fit_date == max(fit_date),
+#     .by = c(date, home, away)
+#   ) |> 
+#   mutate(
+#     correct = 1 * (home_goals == home_pred) * (away_goals == away_pred),
+#     group = ntile(p, 10)
+#   ) |> 
+#   summarise(
+#     p = mean(p),
+#     obs = mean(correct),
+#     .by = group
+#   ) |> 
+#   ggplot(aes(p, obs)) +
+#   geom_abline(
+#     intercept = 0, 
+#     slope = 1,
+#     lty = 2
+#   ) +
+#   geom_point() +
+#   scale_x_continuous(
+#     labels = label_percent(),
+#     guide = guide_axis(cap = "both")
+#   ) +
+#   scale_y_continuous(
+#     labels = label_percent(),
+#     guide = guide_axis(cap = "both")
+#   ) +
+#   labs(
+#     title = "Kvörðun á spá fótboltalíkans um markafjölda hvors liðs",
+#     x = "P(X = x, Y = y)",
+#     y = "P(spá er rétt)"
+#   )
 
 
 
 
-d |> 
-  mutate(
-    pred = home_goals + away_goals
-  ) |> 
-  summarise(
-    p = sum(p),
-    .by = c(date, fit_date, home, away, pred)
-  ) |> 
-  inner_join(
-    results |> 
-      mutate(
-        total_goals = home_goals + away_goals
-      ) |> 
-      select(
-        date, home, away, total_goals
-      )
-  ) |> 
-  filter(
-    fit_date < date
-  ) |> 
-  filter(
-    fit_date == max(fit_date),
-    .by = c(date, home, away)
-  ) 
-mutate(
-  outcome = 1 * (result == pred)
-) |> 
-  mutate(
-    group = ntile(p, 20)
-  ) |> 
-  summarise(
-    pred = mean(p),
-    obs = mean(outcome),
-    .by = c(group)
-  ) |> 
-  ggplot(aes(pred, obs)) +
-  geom_abline(
-    intercept = 0,
-    slope = 1,
-    lty = 2
-  ) +
-  geom_point() +
-  scale_x_continuous(
-    limits = c(0, 1),
-    labels = label_percent(),
-    guide = guide_axis(cap = "both")
-  ) +
-  scale_y_continuous(
-    limits = c(0, 1),
-    labels = label_percent(),
-    guide = guide_axis(cap = "both")
-  ) +
-  labs(
-    title = "Kvörðun á spá fótboltalíkans um niðurstöðu (Heima/Gestir/Jafntefli)",
-    subtitle = "Í fullkomnum heimi gerast hlutir jafnoft (sama %) og líkanið spáir fyrir um",
-    x = "P(X = x)",
-    y = "Hlutfall leikja þar sem niðurstaðan var X = x"
-  )
+# d |> 
+#   mutate(
+#     pred = home_goals + away_goals
+#   ) |> 
+#   summarise(
+#     p = sum(p),
+#     .by = c(date, fit_date, home, away, pred)
+#   ) |> 
+#   inner_join(
+#     results |> 
+#       mutate(
+#         total_goals = home_goals + away_goals
+#       ) |> 
+#       select(
+#         date, home, away, total_goals
+#       )
+#   ) |> 
+#   filter(
+#     fit_date < date
+#   ) |> 
+#   filter(
+#     fit_date == max(fit_date),
+#     .by = c(date, home, away)
+#   ) |> 
+# mutate(
+#   outcome = 1 * (result == pred)
+# ) |> 
+#   mutate(
+#     group = ntile(p, 10)
+#   ) |> 
+#   summarise(
+#     pred = mean(p),
+#     obs = mean(outcome),
+#     .by = c(group)
+#   ) |> 
+#   ggplot(aes(pred, obs)) +
+#   geom_abline(
+#     intercept = 0,
+#     slope = 1,
+#     lty = 2
+#   ) +
+#   geom_point() +
+#   scale_x_continuous(
+#     limits = c(0, 1),
+#     labels = label_percent(),
+#     guide = guide_axis(cap = "both")
+#   ) +
+#   scale_y_continuous(
+#     limits = c(0, 1),
+#     labels = label_percent(),
+#     guide = guide_axis(cap = "both")
+#   ) +
+#   labs(
+#     title = "Kvörðun á spá fótboltalíkans um niðurstöðu (Heima/Gestir/Jafntefli)",
+#     subtitle = "Í fullkomnum heimi gerast hlutir jafnoft (sama %) og líkanið spáir fyrir um",
+#     x = "P(X = x)",
+#     y = "Hlutfall leikja þar sem niðurstaðan var X = x"
+#   )
 
 
 #### Female ####
@@ -279,7 +279,6 @@ d |>
     outcome = 1 * (result == pred)
   ) |> 
   mutate(
-    group = ntile(p, 20),
     group = floor(p * 20) / 20
   ) |> 
   summarise(

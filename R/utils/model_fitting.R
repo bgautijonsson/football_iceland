@@ -6,7 +6,6 @@ library(posterior)
 library(metill)
 library(geomtextpath)
 library(ggtext)
-library(ggh4x)
 library(glue)
 library(here)
 theme_set(theme_metill())
@@ -28,7 +27,7 @@ Sys.setlocale("LC_ALL", "is_IS.UTF-8")
 #' fit_football_model("female")
 fit_football_model <- function(
   sex,
-  model_name = "bivariate_poisson_inflated_diagonal_corrmodel",
+  model_name = "bivariate_poisson_inflated_diagonal_corrmodel.stan",
   chains = 4,
   parallel_chains = 4,
   iter_warmup = 1000,
