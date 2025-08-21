@@ -41,7 +41,7 @@ posterior_goals <- results$draws(c("goals1_pred", "goals2_pred")) |>
   pivot_wider(names_from = type, values_from = value) |>
   inner_join(pred_d, by = "game_nr") |>
   filter(
-    date < today() + 7 + 1,
+    date <= today() + 7,
     date >= today()
   ) |>
   select(

@@ -41,7 +41,7 @@ posterior_goals <- results$draws(c("goals1_pred", "goals2_pred")) |>
   pivot_wider(names_from = type, values_from = value) |>
   inner_join(pred_d, by = "game_nr") |>
   filter(
-    date < today() + 7 + 1,
+    date <= today() + 7,
     date >= today()
   ) |>
   select(
@@ -76,7 +76,7 @@ predictions <- posterior_goals |>
   ) |>
   filter(
     abs(goal_diff) <= 9,
-    division %in% c(1, 2, 7)
+    division %in% c(1, 2, 6)
   ) |>
   count(date, division, home, away, goal_diff, game_nr) |>
   mutate(
@@ -93,7 +93,7 @@ predictions <- posterior_goals |>
     game_nr = max(game_nr) - game_nr + 1,
     match = str_c(home, " - ", away) |>
       fct_reorder(game_nr),
-    division = c("BD", "LD", "ÖD", "ÞD", "FjD", "FiD", "MB")[division]
+    division = c("BD", "LD", "ÖD", "ÞD", "FjD", "MB")[division]
   ) |>
   mutate(
     home = glue(

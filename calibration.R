@@ -7,6 +7,8 @@ Sys.setlocale("LC_ALL", "is_IS.UTF-8")
 sex <- "male"
 ncol <- if (sex == "male") 4 else 5
 
+ntiles <- 10
+
 #### League Placement ####
 d <- here("results", sex, "historical") |>
   list.files(full.names = TRUE, pattern = "^[0-9].*") |>
@@ -24,53 +26,55 @@ d <- here("results", sex, "historical") |>
     fit_date = as_date(fit_date)
   )
 
-results <- here("results", "male", "d.csv") |> 
+results <- here("results", "male", "d.csv") |>
   read_csv()
 
-d |> 
+d |>
   mutate(
     pred = case_when(
       home_goals > away_goals ~ "home",
       home_goals < away_goals ~ "away",
       TRUE ~ "tie"
     )
-  ) |> 
+  ) |>
   summarise(
     p = sum(p),
     .by = c(date, fit_date, home, away, pred)
-  ) |> 
+  ) |>
   inner_join(
-    results |> 
+    results |>
       mutate(
         result = case_when(
           home_goals > away_goals ~ "home",
           home_goals < away_goals ~ "away",
           TRUE ~ "tie"
         )
-      ) |> 
+      ) |>
       select(
-        date, home, away, result
+        date,
+        home,
+        away,
+        result
       )
-  ) |> 
+  ) |>
   filter(
     fit_date < date
-  ) |> 
+  ) |>
   filter(
     fit_date == max(fit_date),
     .by = c(date, home, away)
-  ) |> 
+  ) |>
   mutate(
     outcome = 1 * (result == pred)
-  ) |> 
+  ) |>
   mutate(
-    group = ntile(p, 10),
-    group = floor(p * 10) / 10
-  ) |> 
+    group = floor(p * ntiles) / ntiles
+  ) |>
   summarise(
     pred = mean(p),
     obs = mean(outcome),
     .by = c(group)
-  ) |> 
+  ) |>
   ggplot(aes(pred, obs)) +
   geom_abline(
     intercept = 0,
@@ -102,35 +106,35 @@ ggsave(
   scale = 1.3
 )
 
-# results |> 
-#   select(date, home, away, home_goals, away_goals) |> 
+# results |>
+#   select(date, home, away, home_goals, away_goals) |>
 #   inner_join(
-#     d |> 
+#     d |>
 #       select(
 #         date, home, away, fit_date, p,
 #         home_pred = home_goals,
 #         away_pred = away_goals
 #       )
-#   ) |> 
+#   ) |>
 #   filter(
 #     fit_date < date
-#   ) |> 
+#   ) |>
 #   filter(
 #     fit_date == max(fit_date),
 #     .by = c(date, home, away)
-#   ) |> 
+#   ) |>
 #   mutate(
 #     correct = 1 * (home_goals == home_pred) * (away_goals == away_pred),
 #     group = ntile(p, 10)
-#   ) |> 
+#   ) |>
 #   summarise(
 #     p = mean(p),
 #     obs = mean(correct),
 #     .by = group
-#   ) |> 
+#   ) |>
 #   ggplot(aes(p, obs)) +
 #   geom_abline(
-#     intercept = 0, 
+#     intercept = 0,
 #     slope = 1,
 #     lty = 2
 #   ) +
@@ -149,44 +153,41 @@ ggsave(
 #     y = "P(spá er rétt)"
 #   )
 
-
-
-
-# d |> 
+# d |>
 #   mutate(
 #     pred = home_goals + away_goals
-#   ) |> 
+#   ) |>
 #   summarise(
 #     p = sum(p),
 #     .by = c(date, fit_date, home, away, pred)
-#   ) |> 
+#   ) |>
 #   inner_join(
-#     results |> 
+#     results |>
 #       mutate(
 #         total_goals = home_goals + away_goals
-#       ) |> 
+#       ) |>
 #       select(
 #         date, home, away, total_goals
 #       )
-#   ) |> 
+#   ) |>
 #   filter(
 #     fit_date < date
-#   ) |> 
+#   ) |>
 #   filter(
 #     fit_date == max(fit_date),
 #     .by = c(date, home, away)
-#   ) |> 
+#   ) |>
 # mutate(
 #   outcome = 1 * (result == pred)
-# ) |> 
+# ) |>
 #   mutate(
 #     group = ntile(p, 10)
-#   ) |> 
+#   ) |>
 #   summarise(
 #     pred = mean(p),
 #     obs = mean(outcome),
 #     .by = c(group)
-#   ) |> 
+#   ) |>
 #   ggplot(aes(pred, obs)) +
 #   geom_abline(
 #     intercept = 0,
@@ -210,7 +211,6 @@ ggsave(
 #     x = "P(X = x)",
 #     y = "Hlutfall leikja þar sem niðurstaðan var X = x"
 #   )
-
 
 #### Female ####
 
@@ -240,52 +240,55 @@ d <- here("results", sex, "historical") |>
     fit_date = as_date(fit_date)
   )
 
-results <- here("results", sex, "d.csv") |> 
+results <- here("results", sex, "d.csv") |>
   read_csv()
 
-d |> 
+d |>
   mutate(
     pred = case_when(
       home_goals > away_goals ~ "home",
       home_goals < away_goals ~ "away",
       TRUE ~ "tie"
     )
-  ) |> 
+  ) |>
   summarise(
     p = sum(p),
     .by = c(date, fit_date, home, away, pred)
-  ) |> 
+  ) |>
   inner_join(
-    results |> 
+    results |>
       mutate(
         result = case_when(
           home_goals > away_goals ~ "home",
           home_goals < away_goals ~ "away",
           TRUE ~ "tie"
         )
-      ) |> 
+      ) |>
       select(
-        date, home, away, result
+        date,
+        home,
+        away,
+        result
       )
-  ) |> 
+  ) |>
   filter(
     fit_date < date
-  ) |> 
+  ) |>
   filter(
     fit_date == max(fit_date),
     .by = c(date, home, away)
-  ) |> 
+  ) |>
   mutate(
     outcome = 1 * (result == pred)
-  ) |> 
+  ) |>
   mutate(
-    group = floor(p * 20) / 20
-  ) |> 
+    group = floor(p * ntiles) / ntiles
+  ) |>
   summarise(
     pred = mean(p),
     obs = mean(outcome),
     .by = c(group)
-  ) |> 
+  ) |>
   ggplot(aes(pred, obs)) +
   geom_abline(
     intercept = 0,

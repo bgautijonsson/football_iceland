@@ -100,6 +100,7 @@ cup_games <- here(
         division = 5
       )
   )
+
 results |>
   bind_rows(
     cup_games
