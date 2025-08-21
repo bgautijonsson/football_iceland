@@ -39,7 +39,10 @@ posterior_goals <- results$draws(c("goals1_pred", "goals2_pred")) |>
   ) |>
   select(.draw, type, game_nr, value) |>
   pivot_wider(names_from = type, values_from = value) |>
-  inner_join(pred_d, by = "game_nr") |>
+  inner_join(
+    pred_d, 
+    by = "game_nr"
+  ) |>
   filter(
     date <= today() + 7,
     date >= today()
@@ -657,24 +660,17 @@ plot_dat <- plot_dat_away |>
   mutate(
     loc = as_factor(loc) |>
       fct_relevel("Heima")
-  ) |>
-  semi_join(
-    d |>
-      filter(season == 2025, division == 1) |>
-      pivot_longer(c(home, away), values_to = "team") |>
-      distinct(team)
-  )
+  ) 
 
 dodge <- 0.3
 
 plot_dat |>
   semi_join(
-    next_games |>
-      filter(division == 1) |>
-      distinct(home, away) |>
-      pivot_longer(c(everything()), values_to = "team") |>
+    d |>
+      filter(season == 2025, division == 1) |>
+      pivot_longer(c(home, away), values_to = "team") |>
       distinct(team)
-  ) |>
+  ) |> 
   ggplot(aes(median, team)) +
   geom_hline(
     yintercept = seq(1, 12, 2),

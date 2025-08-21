@@ -326,6 +326,8 @@ alpha_prior <- read_csv(
   ) |>
   pull(n)
 
+model_d
+
 # Prepare Stan data
 stan_data <- list(
   K = nrow(teams),

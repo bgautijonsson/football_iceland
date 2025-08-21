@@ -66,7 +66,7 @@ plot_dat |>
   # ) |>
   inner_join(
     d |>
-      filter(division == 1) |>
+      # filter(division == 1) |>
       pivot_longer(c(home, away)) |>
       select(
         season,
@@ -90,7 +90,12 @@ plot_dat |>
       )
   ) |>
   filter(
-    season == 2025
+    season >= 2021,
+    team %in% c(
+      "FH", "Fram",
+      "Vestri", "ÍBV",
+      "KA", "KR"
+      )
   ) |>
   ggplot(aes(date, median)) +
   geom_hline(
@@ -101,7 +106,7 @@ plot_dat |>
   geom_line(
     data = ~ rename(.x, tm = team),
     aes(
-      group = paste(tm, season)
+      group = paste(tm)
     ),
     col = "grey50",
     alpha = 0.2,
@@ -109,35 +114,34 @@ plot_dat |>
   ) +
   geom_line(
     aes(
-      col = team,
-      group = paste(team, season)
+      group = paste(team)
     ),
     linewidth = 1
   ) +
   scale_x_date(
     guide = guide_axis(cap = "both"),
-    breaks = breaks_width("1 month"),
+    breaks = breaks_pretty(),
     labels = label_date_short()
   ) +
   scale_y_continuous(
     guide = guide_axis(cap = "both")
   ) +
-  scale_colour_manual(
-    values = c(
-      "Víkingur R." = "#b30000",
-      "Breiðablik" = "#006d2c",
-      "Valur" = "#ce1256",
-      "KR" = "black",
-      "Stjarnan" = "#08519c",
-      "ÍA" = "#fec44f",
-      "KA" = "#9ecae1",
-      "ÍBV" = "black",
-      "Fram" = "#4292c6",
-      "FH" = "#d9d9d9",
-      "Vestri" = "#08306b",
-      "Afturelding" = "#e31a1c"
-    )
-  ) +
+  # scale_colour_manual(
+  #   values = c(
+  #     "Víkingur R." = "#b30000",
+  #     "Breiðablik" = "#006d2c",
+  #     "Valur" = "#ce1256",
+  #     "KR" = "black",
+  #     "Stjarnan" = "#08519c",
+  #     "ÍA" = "#fec44f",
+  #     "KA" = "#9ecae1",
+  #     "ÍBV" = "black",
+  #     "Fram" = "#4292c6",
+  #     "FH" = "#525252",
+  #     "Vestri" = "#08306b",
+  #     "Afturelding" = "#e31a1c"
+  #   )
+  # ) +
   facet_grid(
     rows = vars(variable),
     cols = vars(team)
