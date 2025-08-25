@@ -1,38 +1,30 @@
 date,home,away,division,game_nr,home_timediff,away_timediff
-2025-08-21,Stjarnan,FH,1,1,8,5
-2025-08-21,Þór/KA,FHL,1,2,9,9
-2025-08-21,Grótta,KR,2,3,50,50
-2025-08-21,Grindavík/ Njarðvík,Afturelding,2,4,50,50
-2025-08-21,Fylkir,Keflavík,2,5,50,50
-2025-08-21,ÍA,Haukar,2,6,50,50
-2025-08-21,ÍBV,HK,2,7,21,50
-2025-08-22,Breiðablik,Tindastóll,1,8,6,8
-2025-08-28,FH,Þróttur R.,1,9,7,8
-2025-08-28,Tindastóll,Víkingur R.,1,10,6,8
-2025-08-28,ÍBV,ÍA,2,11,7,7
-2025-08-28,HK,Fylkir,2,12,7,7
-2025-08-28,KR,Haukar,2,13,7,7
-2025-08-28,Afturelding,Grótta,2,14,7,7
-2025-08-30,FHL,Stjarnan,1,15,9,9
-2025-08-30,Þór/KA,Fram,1,16,9,10
-2025-08-30,Keflavík,Grindavík/ Njarðvík,2,17,9,9
-2025-09-04,Tindastóll,Fram,1,18,7,5
-2025-09-04,Víkingur R.,Valur,1,19,7,15
-2025-09-04,Breiðablik,FH,1,20,13,7
-2025-09-04,Haukar,Afturelding,2,21,7,7
-2025-09-04,ÍA,KR,2,22,7,7
-2025-09-04,Fylkir,ÍBV,2,23,7,7
-2025-09-04,Grótta,Keflavík,2,24,7,5
-2025-09-04,Grindavík/ Njarðvík,HK,2,25,5,7
-2025-09-06,Stjarnan,Þór/KA,1,26,7,7
-2025-09-07,Þróttur R.,FHL,1,27,10,8
-2025-09-12,Stjarnan,Fram,1,28,6,8
-2025-09-12,Þór/KA,Þróttur R.,1,29,6,5
-2025-09-12,FH,Víkingur R.,1,30,8,8
-2025-09-14,FHL,Breiðablik,1,31,7,10
-2025-09-14,Valur,Tindastóll,1,32,10,10
-2025-09-20,Fram,Valur,1,33,8,6
-2025-09-20,Þróttur R.,Stjarnan,1,34,8,8
-2025-09-20,Breiðablik,Þór/KA,1,35,6,8
-2025-09-20,Víkingur R.,FHL,1,36,8,6
-2025-09-20,Tindastóll,FH,1,37,6,8
+2025-08-28,FH,Þróttur R.,1,1,7,8
+2025-08-28,Tindastóll,Víkingur R.,1,2,6,8
+2025-08-28,Afturelding,Grótta,2,3,50,50
+2025-08-28,KR,Haukar,2,4,50,50
+2025-08-28,HK,Fylkir,2,5,50,50
+2025-08-28,ÍBV,ÍA,2,6,28,50
+2025-08-30,FHL,Stjarnan,1,7,9,9
+2025-08-30,Þór/KA,Fram,1,8,9,10
+2025-08-30,Keflavík,Grindavík/ Njarðvík,2,9,50,50
+2025-09-04,Víkingur R.,Valur,1,10,7,15
+2025-09-04,Tindastóll,Fram,1,11,7,5
+2025-09-04,Breiðablik,FH,1,12,13,7
+2025-09-04,ÍA,KR,2,13,7,7
+2025-09-04,Grótta,Keflavík,2,14,7,5
+2025-09-04,Fylkir,ÍBV,2,15,7,7
+2025-09-04,Haukar,Afturelding,2,16,7,7
+2025-09-04,Grindavík/ Njarðvík,HK,2,17,5,7
+2025-09-06,Stjarnan,Þór/KA,1,18,7,7
+2025-09-07,Þróttur R.,FHL,1,19,10,8
+2025-09-12,Þór/KA,Þróttur R.,1,20,6,5
+2025-09-12,Stjarnan,Fram,1,21,6,8
+2025-09-12,FH,Víkingur R.,1,22,8,8
+2025-09-14,FHL,Breiðablik,1,23,7,10
+2025-09-14,Valur,Tindastóll,1,24,10,10
+2025-09-20,Breiðablik,Þór/KA,1,25,6,8
+2025-09-20,Víkingur R.,FHL,1,26,8,6
+2025-09-20,Tindastóll,FH,1,27,6,8
+2025-09-20,Fram,Valur,1,28,8,6
+2025-09-20,Þróttur R.,Stjarnan,1,29,8,8
